@@ -118,7 +118,7 @@ async def game(context):
 
     embed.add_field(name="Your points", value="0", inline=True)
 
-    embed.add_field(name="Bot's points", value="0", inline=True)
+    embed.add_field(name="Bots points", value="0", inline=True)
 
     embed.add_field(name="Number of chances", value="6", inline=True)        #Loop runs 5 times
 
