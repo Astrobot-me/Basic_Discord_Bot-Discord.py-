@@ -6,6 +6,7 @@ import asyncio
 client = commands.Bot(command_prefix="#")
 coin = ['HEADs','TAILS']
 dice = ['1','2','3','4','5']
+magic_ball = ['As I see it, yes.','Ask again later','Better not tell you now','Cannot predict now','Concentrate and ask again','Dont count on it','It is certain','It is decidedly so']
 @client.event
 async def on_ready():
     print(" Bot is ready")
@@ -86,9 +87,17 @@ async def h(ctx):
 
 
 
-
-
-
+@client.command(aliases=['magicball'])
+async def mb(ctx):
+    embed = discord.Embed(title='Magic Ball',description='you will get 10 seconds to Ask in your Mind',color=discord.Color.dark_purple())
+    embed.set_thumbnail(url='https://ibb.co/zXh4K2L')
+    embed.add_field(name='Get Advised',value='Ask Any question in your mind and Bot will answer and boost Your confidence')
+    await ctx.send(embed=embed)
+    await asyncio.sleep(10)
+    magic_answer = random.choice(magic_ball)
+    embed = discord.Embed(title='Your Answer is ',description=magic_answer,color=discord.Color.dark_purple())
+    embed.set_thumbnail(url='https://ibb.co/zXh4K2L')
+    await ctx.send(embed=embed)
 
 
 
@@ -110,9 +119,9 @@ async def game(context):
 
 
 
-    embed = discord.Embed(title="Stone paper scissor game", description="Timeout is of 30 seconds" ,color=discord.Color.teal())
+    embed = discord.Embed(title="Stone paper scissor game", description="Timeout is of 30 seconds" ,color=discord.Color.dark_gold())
 
-    embed.add_field(name="Rules", value="**__Input should be in lowercase__**\nFor Each winning u will Get 100points\n50 points for tie", inline=False)
+    embed.add_field(name="Rules", value="**__Input should be in lowercase__**\n**__For Each winning you will Get 100points__**\n**__50 points for tie__**\n**__Spelling Should Be:- stone/paper/scissor__**", inline=False)
 
     embed.add_field(name="Input your Choice", value="Stone/Paper/Scissor", inline=True)
 
@@ -139,13 +148,13 @@ async def game(context):
             if msg.content == choice:
 
 
-                embed = discord.Embed(color=discord.Color.teal())
+                embed = discord.Embed(color=discord.Color.dark_gold())
                 your_points = your_points + 50
                 computer_points = computer_points +50
 
 
 
-                embed.add_field(name="Score", value=f"You chose {msg.content} and Calender chose {choice}", inline=False)
+                embed.add_field(name="Score", value=f"You choose {msg.content} and Calender choose {choice}", inline=False)
                 embed.add_field(name="Points", value="You Both Tried! Better Luck Next Time!", inline=False)
                 await context.send(embed=embed)
 
@@ -153,10 +162,10 @@ async def game(context):
             elif msg.content == 'stone' and choice == 'scissor':
                 your_points = your_points + 100
 
-                embed = discord.Embed(color=discord.Color.teal())
+                embed = discord.Embed(color=discord.Color.dark_gold())
 
 
-                embed.add_field(name="Score", value=f"You chose {msg.content} and Bot chose {choice}", inline=False)
+                embed.add_field(name="Score", value=f"You choose {msg.content} and Bot choose {choice}", inline=False)
 
                 embed.add_field(name="Points", value="You get 100 point", inline=False)
 
@@ -165,10 +174,10 @@ async def game(context):
             elif msg.content == 'scissor' and choice == 'stone':
                 computer_points = computer_points + 100
 
-                embed = discord.Embed(color=discord.Color.teal())
+                embed = discord.Embed(color=discord.Color.dark_gold())
 
 
-                embed.add_field(name="Score", value=f"You chose {msg.content} and Bot chose {choice}", inline=False)
+                embed.add_field(name="Score", value=f"You choose {msg.content} and Bot choose {choice}", inline=False)
 
                 embed.add_field(name="Points", value= "Bot gets 100 point", inline=False)
 
@@ -179,10 +188,10 @@ async def game(context):
                 
                 your_points = your_points + 100
 
-                embed = discord.Embed(color=discord.Color.teal())
+                embed = discord.Embed(color=discord.Color.dark_gold())
 
 
-                embed.add_field(name="Score", value=f"You chose {msg.content} and Bot chose {choice}", inline=False)
+                embed.add_field(name="Score", value=f"You choose {msg.content} and Bot choose {choice}", inline=False)
 
                 embed.add_field(name="Points", value="You get 100 point", inline=False)
 
@@ -192,7 +201,7 @@ async def game(context):
                 computer_points = computer_points + 100
 
 
-                embed = discord.Embed(color=discord.Color.teal())
+                embed = discord.Embed(color=discord.Color.dark_gold())
 
 
 
@@ -206,7 +215,7 @@ async def game(context):
                 your_points = your_points + 100
 
 
-                embed = discord.Embed(color=discord.Color.teal())
+                embed = discord.Embed(color=discord.Color.dark_gold())
 
 
                 embed.add_field(name="Score", value=f"You chose {msg.content} and Bot chose {choice}", inline=False)
@@ -233,7 +242,7 @@ async def game(context):
 
 
             else:
-                embed = discord.Embed(title="Invalid input",description="Try again! Input Stone \Paper\ Scissors", color=discord.Color.teal())
+                embed = discord.Embed(title="Invalid input",description="Try again! Input stone\paper\scissors", color=discord.Color.dark_gold())
 
                 await context.send(embed=embed)
 
@@ -241,7 +250,7 @@ async def game(context):
                 continue
 
 
-            embed = discord.Embed(color=discord.Color.teal())
+            embed = discord.Embed(color=discord.Color.dark_gold())
             if 6 - i == 0:
                 embed.add_field(name="Chances left", value="0", inline=False)
             else:
@@ -252,7 +261,7 @@ async def game(context):
 
         if i > 6:
             # print("Game over""\n")
-            embed = discord.Embed(title="**__GAME OVER __**", color=discord.Color.teal())
+            embed = discord.Embed(title="**__GAME OVER __**", color=discord.Color.dark_gold())
             # await context.send("Game over")
             await context.send(embed=embed)
 
