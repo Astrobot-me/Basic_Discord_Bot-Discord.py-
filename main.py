@@ -82,9 +82,9 @@ async def Box(ctx):
 @client.command(aliases=["hlp"])
 async def h(ctx):
     embed = discord.Embed(title=':grey_question: HELP :grey_question: ',description="HELP commands:grey_question: ",color=discord.Color.blurple())
-    embed.add_field(name='Help Prefix',value='#')
-    embed.add_field(name='help commands',value='kick,hlp,greet,flp,rld,game,clr,box,magic ball')
-    embed.add_field(name='Magic Ball',value='command prefix **__#mg__**')
+    embed.add_field(name='Help Prefix',value='#',inline=False)
+    embed.add_field(name='help commands',value='kick,hlp,greet,flp,rld,game,clr,box,magic ball',inline=False)
+    embed.add_field(name='Magic Ball',value='command prefix **__#mg__**',inline=False)
     await ctx.send(embed=embed)
 
 
