@@ -92,7 +92,7 @@ async def h(ctx):
 @client.command(aliases=['magicball'])
 async def mg(ctx):
     embed = discord.Embed(title='Magic Ball',description='you will get 10 seconds to Ask in your Mind',color=discord.Color.dark_purple())
-    embed.set_thumbnail(url=https://ibb.co/zXh4K2L)
+    embed.set_thumbnail(url='https://ibb.co/zXh4K2L')
     embed.add_field(name='Get Advised',value='Ask Any question in your mind and Bot will answer and boost Your confidence')
     await ctx.send(embed=embed)
     await asyncio.sleep(10)
