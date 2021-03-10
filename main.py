@@ -17,7 +17,7 @@ x =  'On '+str(len(client.guilds)) + ' Servers'
 #discod presense
 async def ch_pr():
     await client.wait_until_ready()
-    statues = ['Discord.py',x,'help#','Under DevelopMent','sleeping']
+    statues = ['Discord.py',x,'help||prefix-#','Under DevelopMent','sleeping']
     
     while not client.is_closed():
         status = random.choice(statues)
@@ -82,15 +82,17 @@ async def Box(ctx):
 @client.command(aliases=["hlp"])
 async def h(ctx):
     embed = discord.Embed(title=':grey_question: HELP :grey_question: ',description="HELP commands:grey_question: ",color=discord.Color.blurple())
+    embed.add_field(name='Help Prefix',value='#')
     embed.add_field(name='help commands',value='kick,hlp,greet,flp,rld,game,clr,box,magic ball')
+    embed.add_field(name='Magic Ball',value='command prefix **__#mg__**')
     await ctx.send(embed=embed)
 
 
 
 @client.command(aliases=['magicball'])
-async def mb(ctx):
+async def mg(ctx):
     embed = discord.Embed(title='Magic Ball',description='you will get 10 seconds to Ask in your Mind',color=discord.Color.dark_purple())
-    embed.set_thumbnail(url='https://ibb.co/zXh4K2L')
+    embed.set_thumbnail(url=https://ibb.co/zXh4K2L)
     embed.add_field(name='Get Advised',value='Ask Any question in your mind and Bot will answer and boost Your confidence')
     await ctx.send(embed=embed)
     await asyncio.sleep(10)
