@@ -117,7 +117,7 @@ async def mg(ctx):
 async def userinfo(ctx, *, user: discord.User = None): # b'\xfc'
     if user is None:
         user = ctx.author      
-    date_format = "%a, %d %b %Y %I:%M %p"
+    date_format = "%a, %d ,%b "#,%Y, %I:%M %p"
     embed = discord.Embed(color=0xdfa3ff, description=user.mention)
     embed.set_author(name=str(user), icon_url=user.avatar_url)
     embed.set_thumbnail(url=user.avatar_url)
