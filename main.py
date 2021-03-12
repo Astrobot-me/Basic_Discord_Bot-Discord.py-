@@ -54,11 +54,11 @@ async def greet(ctx,member : discord.Member):
 async def rld(ctx):
     
     d=random.choice(dice)
-    embed = discord.Embed(title = 'Rolling a Dice',description="Try Your Luck",color=member.color)
+    embed = discord.Embed(title = 'Rolling a Dice',description="Try Your Luck",color=discord.Color.dark_gray())
     embed.set_thumbnail(url='https://image.freepik.com/free-vector/two-vector-red-casino-falling-dice-with-white-dots-isolated-background_1284-48503.jpg')
     await ctx.send(embed=embed)
     await asyncio.sleep(2)
-    embed= discord.Embed(title='You gotta:',description=d,color=member.color)
+    embed= discord.Embed(title='You gotta:',description=d,color=discord.Color.dark_gray())
     embed.set_thumbnail(url='https://image.freepik.com/free-vector/two-vector-red-casino-falling-dice-with-white-dots-isolated-background_1284-48503.jpg')
     ctx.send(embed=embed)
 
@@ -66,11 +66,11 @@ async def rld(ctx):
 @client.command(aliases=['Flc'])
 async def flc(ctx):
     c = random.choice(coin)
-    embed = discord.Embed(title='Fliping a Coin',description="Try your Luck",color=member.color)
+    embed = discord.Embed(title='Fliping a Coin',description="Try your Luck",color=discord.Color.dark_orange())
     embed.set_thumbnail(url='https://image.freepik.com/free-vector/dollar_53876-25498.jpg')
     await ctx.send(embed=embed)
     await asyncio.sleep(2)
-    embed= discord.Embed(title='You gotta',description=c,color=member.color)
+    embed= discord.Embed(title='You gotta',description=c,color=discord.Color.dark_orange())
     embed.set_thumbnail(url='https://image.freepik.com/free-vector/dollar_53876-25498.jpg')
     ctx.send(embed=embed)
 
