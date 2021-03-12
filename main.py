@@ -54,17 +54,25 @@ async def greet(ctx,member : discord.Member):
 async def rld(ctx):
     
     d=random.choice(dice)
-    embed = discord.Embed(title = 'Rolling a Dice',description="Try Your Luck",color=discord.Color.orange())
-    embed.add_field(name='you Gotta:--',value=str(d),inline=True)
-   #embed.set_footer(test='Requested By '+ str(url = member.avatar_url))
+    embed = discord.Embed(title = 'Rolling a Dice',description="Try Your Luck",color=member.color)
+    embed.set_thumbnail(url='https://image.freepik.com/free-vector/two-vector-red-casino-falling-dice-with-white-dots-isolated-background_1284-48503.jpg')
     await ctx.send(embed=embed)
+    await asyncio.sleep(2)
+    embed= discord.Embed(title='You gotta:',description=d,color=member.color)
+    embed.set_thumbnail(url='https://image.freepik.com/free-vector/two-vector-red-casino-falling-dice-with-white-dots-isolated-background_1284-48503.jpg')
+    ctx.send(embed=embed)
 
-@client.command(aliases=['Flp'])
-async def flp(ctx):
+
+@client.command(aliases=['Flc'])
+async def flc(ctx):
     c = random.choice(coin)
-    embed = discord.Embed(title='Fliping a Coin',description="Try your Luck",color=discord.Color.orange())
-    embed.add_field(name='You Got ',value=str(c))
+    embed = discord.Embed(title='Fliping a Coin',description="Try your Luck",color=member.color)
+    embed.set_thumbnail(url='https://image.freepik.com/free-vector/dollar_53876-25498.jpg')
     await ctx.send(embed=embed)
+    await asyncio.sleep(2)
+    embed= discord.Embed(title='You gotta',description=c,color=member.color)
+    embed.set_thumbnail(url='https://image.freepik.com/free-vector/dollar_53876-25498.jpg')
+    ctx.send(embed=embed)
 
 
 @client.command(aliases=['clr'])
@@ -91,7 +99,7 @@ async def Box(ctx):
 async def h(ctx):
     embed = discord.Embed(title=':grey_question: HELP :grey_question: ',description="HELP commands:grey_question: ",color=discord.Color.blurple())
     embed.add_field(name='Help Prefix',value='#',inline=False)
-    embed.add_field(name='help commands',value='kick,hlp,greet,flp,rld,game,clr,box,magic ball',inline=False)
+    embed.add_field(name='help commands',value='kick,hlp,greet,flc,rld,game,clr,box,magic ball',inline=False)
     embed.add_field(name='Magic Ball',value='command prefix **__#mg__**',inline=False)
     await ctx.send(embed=embed)
 
@@ -129,13 +137,13 @@ async def userinfo(ctx, member: discord.Member = None):
     embed.set_author(name=f"User Info {member}")
     embed.set_thumbnail(url=member.avatar_url)
     embed.set_footer(text=f"Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
-    embed.add_field(name='ID',value=member.id)
-    embed.add_field(name='User Name in the server:',value=member.display_name)
-    embed.add_field(name='Created at:',value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p CST"))
-    embed.add_field(name='Joined at:',value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p CST"))
-    embed.add_field(name=f'Roles ({len(roles)})',value=" ".join([role.mention for role in roles]))
-    embed.add_field(name='Most Prior Role:',value=member.top_role.mention)
-    embed.add_field(name='Is Member a Bot?',value=member.bot)
+    embed.add_field(name='ID',value=member.id,inline=False)
+    embed.add_field(name='User Name in the server:',value=member.display_name,inline=False)
+    embed.add_field(name='Created at:',value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
+    embed.add_field(name='Joined at:',value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
+    embed.add_field(name=f'Roles ({len(roles)})',value=" ".join([role.mention for role in roles]),inline=False)
+    embed.add_field(name='Most Prior Role:',value=member.top_role.mention,inline=False)
+    embed.add_field(name='Is Member a Bot?',value=member.bot,inline=False)
 
     await ctx.send(embed=embed)
 
