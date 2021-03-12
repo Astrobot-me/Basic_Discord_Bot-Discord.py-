@@ -144,7 +144,7 @@ async def userinfo(ctx, member: discord.Member = None):
     embed.add_field(name=f'Roles ({len(roles)})',value=" ".join([role.mention for role in roles]),inline=False)
     #embed.add_field(name=f'{member.mention} has permissions to mangage server?',value=discord.manage_guild(),inline=False)
     #embed.add_field(name=f'{member.member} can manage server roles?', value=discord.manage_roles(),inline=False)
-    embed.add_field(name=f'{member.member} is on mobile discord?', value=member.is_on_mobile,inline=False)
+    #embed.add_field(name=f'{member.member} is on mobile discord?', value=member.is_on_mobile,inline=False)
     embed.add_field(name='Most Prior Role:',value=member.top_role.mention,inline=False)
     embed.add_field(name='Is Member a Bot?',value=member.bot,inline=False)
     
