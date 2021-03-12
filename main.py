@@ -134,7 +134,7 @@ async def userinfo(ctx, member: discord.Member = None):
     embed.add_field(name='Created at:',value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p CST"))
     embed.add_field(name='Joined at:',value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p CST"))
     embed.add_field(name=f'Roles ({len(roles)})',value=" ".join([role.mention for role in roles]))
-    embed.add_field(name='Most Prior Role:',value=member.top_role.metion)
+    embed.add_field(name='Most Prior Role:',value=member.top_role.mention)
     embed.add_field(name='Is Member a Bot?',value=member.bot)
 
     await ctx.send(embed=embed)
