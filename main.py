@@ -60,7 +60,7 @@ async def rld(ctx):
     await asyncio.sleep(2)
     embed= discord.Embed(title='You gotta:',description=d,color=discord.Color.dark_gray())
     embed.set_thumbnail(url='https://image.freepik.com/free-vector/two-vector-red-casino-falling-dice-with-white-dots-isolated-background_1284-48503.jpg')
-    ctx.send(embed=embed)
+    await ctx.send(embed=embed)
 
 
 @client.command(aliases=['Flc'])
@@ -72,7 +72,7 @@ async def flc(ctx):
     await asyncio.sleep(2)
     embed= discord.Embed(title='You gotta',description=c,color=discord.Color.dark_orange())
     embed.set_thumbnail(url='https://image.freepik.com/free-vector/dollar_53876-25498.jpg')
-    ctx.send(embed=embed)
+    await ctx.send(embed=embed)
 
 
 @client.command(aliases=['clr'])
