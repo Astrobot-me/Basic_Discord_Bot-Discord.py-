@@ -142,10 +142,20 @@ async def userinfo(ctx, member: discord.Member = None):
     embed.add_field(name='Created at:',value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
     embed.add_field(name='Joined at:',value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
     embed.add_field(name=f'Roles ({len(roles)})',value=" ".join([role.mention for role in roles]),inline=False)
+    embed.add_field(name=f'{member.mention} has permissions to mangage server?',value=member.administrator,inline=False)
+    embed.add_field(name=f'{member.member} can manage server roles?', value=member.manage_roles,inline=False)
+    embed.add_field(name=f'{member.member} is on mobile discord?', value=member.is_on_mobile,inline=False)
     embed.add_field(name='Most Prior Role:',value=member.top_role.mention,inline=False)
     embed.add_field(name='Is Member a Bot?',value=member.bot,inline=False)
-
+    
     await ctx.send(embed=embed)
+
+
+#async def on_member_join(self, member):
+ #       guild = member.guild
+   #     if guild.system_channel is not None:
+    #        to_send = 'Welcome {0.mention} to {1.name}!'.format(member, guild)
+     #       await guild.system_channel.send(to_send)
 
 
 
