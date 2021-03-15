@@ -200,7 +200,7 @@ async def game(context):
         while (i <= 6):
 
 
-            msg = await client.wait_for("message", timeout=30 , check=lambda message: message.author == context.author and message.channel == context.channel and message.content in  ["stone", "paper", "scissors"] )
+            msg = await client.wait_for("message", timeout=30 , check=lambda message: message.author == context.author and message.channel == context.channel and message.content)
 
             choice = random.choice(list1)
 
@@ -326,7 +326,7 @@ async def game(context):
             # await context.send("Game over")
             await context.send(embed=embed)
 
-            embed = discord.Embed(title="Scorecard", color=discord.Color.teal())
+            embed = discord.Embed(title="Scorecard", color=discord.Color.dark_gold())
             embed.add_field(name="Players Score", value=f"Your score:{your_points}\nBot's score:{computer_points}\n", inline=False)
             if computer_points > your_points:
                 # print("The computer has won and you have lost")
