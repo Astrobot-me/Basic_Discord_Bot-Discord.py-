@@ -143,7 +143,7 @@ async def userinfo(ctx, member: discord.Member = None):
     embed.add_field(name='User Name in the server:',value=member.display_name,inline=False)
     embed.add_field(name='Discriminator:',value=member.discriminator,inline=False)
     embed.add_field(name='Current Status:',value=str(member.status).title(),inline=False)
-    embed.add_field(name='Current Activity:',value=f'{str(member.activity.type).title().split('.')[1]} {member.activity.name}' if member.activity is not None else 'None')
+    #embed.add_field(name='Current Activity:',value=f'{str(member.activity.type).title().split('.')[1]}{member.activity.name}' if member.activity is not None else 'None')
     embed.add_field(name='Created at:',value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
     embed.add_field(name='Joined at:',value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
     embed.add_field(name=f'Roles ({len(roles)})',value=" ".join([role.mention for role in roles]),inline=False)
