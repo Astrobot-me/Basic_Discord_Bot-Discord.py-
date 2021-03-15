@@ -10,7 +10,7 @@ import asyncio
 
 
 
-client = commands.Bot(command_prefix="#")
+client = commands.Bot(command_prefix="+",intents = discord.Intents.all())
 coin = ['HEADs','TAILS']
 dice = ['1','2','3','4','5']
 magic_ball = ['As I see it, yes.','Ask again later','Better not tell you now','Cannot predict now','Concentrate and ask again','Dont count on it','It is certain','It is decidedly so',"Hell No!"]
@@ -25,7 +25,7 @@ async def on_ready():
 async def ch_pr():
     await client.wait_until_ready()
     x =  'On '+str(len(client.guilds)) + ' Servers'
-    statues = ['Discord.py',x,'help || prefix-#','Under Development','Sleeping','Version - 0.7']
+    statues = ['Discord.py',x,'help || prefix-+','Under Development','Sleeping','Version - 0.7']
     
     while not client.is_closed():
         status = random.choice(statues)
@@ -37,7 +37,7 @@ client.loop.create_task(ch_pr())
 @client.command(aliases=['k'])
 @commands.has_permissions(kick_members = True)
 async def kick(ctx,member : discord.Member,*,reason="No reason Provided"):
-    embed = discord.Embed(title = "kick", description = str(member.mention)+" has been kicked from "+ str(), color=discord.Color.red())
+    embed = discord.Embed(title = "kick", description = str(member.mention)+" has been kicked from "+ str(guild.name), color=discord.Color.red())
     await member.kick(reason=reason)
     await ctx.send(embed=embed)
     ###  await ctx.send(embed=embed)
@@ -401,4 +401,4 @@ async def game(context):
 
 
 
-client.run('ODE2OTk0MjY1Mzg4NDE3MDM0.YEDDMw.FxsjJKE_XmOSia3pagtNm25OyX0')
+client.run('ODE2OTk0MjY1Mzg4NDE3MDM0.YEDDMw.9xn49JtZ6Rlw8398jUDpM85n3jk')
