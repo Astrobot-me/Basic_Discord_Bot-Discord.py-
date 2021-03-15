@@ -10,7 +10,7 @@ import asyncio
 
 
 
-client = commands.Bot(command_prefix="+")
+client = commands.Bot(command_prefix="+",intents = discord.Intents.all())
 coin = ['HEADs','TAILS']
 dice = ['1','2','3','4','5']
 magic_ball = ['As I see it, yes.','Ask again later','Better not tell you now','Cannot predict now','Concentrate and ask again','Dont count on it','It is certain','It is decidedly so',"Hell No!"]
