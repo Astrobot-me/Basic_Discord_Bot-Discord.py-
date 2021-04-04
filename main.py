@@ -3,6 +3,7 @@ from discord.ext import commands
 import random
 import asyncio
 import qrcode
+import PIL
 
 
 
@@ -110,15 +111,15 @@ async def h(ctx):
 @client.command(aliases=['qrcode'])
 async def qr(ctx,member:discord.Member=None,*,content):
     member = ctx.author if not member else member
-    ctx.send('**CHECK YOUR DMs**')
+    await ctx.send('**CHECK YOUR DMs**')
     data=content
     qr = qrcode.QRCode(version=1,box_size=10,border=5)
     qr.add_data(data)
     img = qr.make_image(fill_color='white',back_color='black')
     embed = discord.Embed(title='Your Qr Code is Here',description=f'Qr code For link {content}',color=member.color,timestamps=ctx.message.created_at)
     img.save('MyQRCode1.png')
-    await client.send_message(member,embed=embed)
-    await client.send_message(member,file=discord.File('MyQRCode1.png'))
+    await member.send(embed=embed)
+    await member.send(file=discord.File('MyQRCode1.png'))
     await asyncio.sleep(1)
     img.delete('MyQRCode1.png')
     
