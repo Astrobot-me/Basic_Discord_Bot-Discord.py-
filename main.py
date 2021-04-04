@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import random
 import asyncio
+import qrcode
 
 
 
@@ -9,8 +10,7 @@ import asyncio
 
 
 
-
-client = commands.Bot(command_prefix="+")
+client = commands.Bot(command_prefix="+",intents=discord.Intents.all())
 coin = ['HEADs','TAILS']
 dice = ['1','2','3','4','5']
 magic_ball = ['As I see it, yes.','Ask again later','Better not tell you now','Cannot predict now','Concentrate and ask again','Dont count on it','It is certain','It is decidedly so',"Hell No!"]
@@ -107,10 +107,23 @@ async def h(ctx):
 
 
 
+@client.command(aliases=['qrcode'])
+async def qr(ctx,member:discord.Member=None,*,content):
+    member = ctx.author if not member else member
+    ctx.send('**CHECK YOUR DMs**')
+    data=content
+    qr = qrcode.QRCode(version=1,box_size=10,border=5)
+    qr.add_data(data)
+    img = qr.make_image(fill_color='white',back_color='black')
+    embed = discord.Embed(title='Your Qr Code is Here',description=f'Qr code For link {content}',color=member.color,timestamps=ctx.message.created_at)
+    img.save('MyQRCode1.png')
+    await client.send_message(member,embed=embed)
+    await client.send_message(member,file=discord.File('MyQRCode1.png'))
+    await asyncio.sleep(1)
+    img.delete('MyQRCode1.png')
+    
 
-
-
-
+   
 
 
 
@@ -406,4 +419,4 @@ async def game(context):
 
 
 
-client.run('ODE2OTk0MjY1Mzg4NDE3MDM0.YEDDMw.9xn49JtZ6Rlw8398jUDpM85n3jk')
+client.run('ODE2OTk0MjY1Mzg4NDE3MDM0.YEDDMw.U-Zq2m5PO0ZctUwcTQ0db9PoDuE')
