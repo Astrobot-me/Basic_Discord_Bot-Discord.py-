@@ -23,9 +23,9 @@ async def on_ready():
     print(" Bot is ready")
 
 @client.event
-async def on_member_join(None):
+async def on_member_join(member):
     member_joinchannel = client.get_channel(828623138304163881)
-    embed = discord.Embed(title='**Welcome to the Calender Official**')
+    embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.mention}')
     await member_joinchannel.send(embed=embed)
 #print(x)
 
@@ -33,7 +33,7 @@ async def on_member_join(None):
 async def ch_pr():
     await client.wait_until_ready()
     x =  'On '+str(len(client.guilds)) + ' Servers'
-    statues = ['Discord.py',x,'help || prefix-'+'','Under Development','Sleeping','Version - 0.8']
+    statues = ['Discord.py',x,"Help | prefix:-'+'",'Under Development','Sleeping','Version - 0.8']
     
     while not client.is_closed():
         status = random.choice(statues)
@@ -107,7 +107,12 @@ async def convcurr(ctx,arg1,arg2,*,amount):
     curr1 = arg1.upper()
     curr2 = arg2.upper()
     value = c.convert(amount,curr1,curr2)
-    await ctx.send(value)
+    embed = discord.Embed(title='Currency Converter',color=discord.Color.gold())
+    embed.add_field(name=f'Currency You are Converting From {curr1}',inline=False)
+    embed.add_field(name=f'Currency You are Converting to {curr2}',inline=False)
+    embed.add_field(name=f'Currency Amount:- {amount}',inline=False)
+    embed.add_field(name=f'{curr1} values {value} {curr2} in {curr2} ',inline=False)
+    await ctx.send(embed=embed)
 
 
 
