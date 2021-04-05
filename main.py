@@ -142,7 +142,7 @@ async def qr(ctx,*,content,member:discord.Member = None):
     await member.send(embed=embed)
     await member.send(file=discord.File('QRcode.png'))
     await asyncio.sleep(1)
-    img.delete('QRcode.png')
+    #img.delete('QRcode.png')
     
 
 @client.command()
