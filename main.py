@@ -109,7 +109,7 @@ async def h(ctx):
 
 
 @client.command(aliases=['qrcode'])
-async def qr(ctx,member:discord.Member=None,*,content):
+async def qr(ctx,member:discord.Member = None,*,content):
     member = ctx.author if not member else member
     await ctx.channel.purge(limit = 1)
     await ctx.send('**CHECK YOUR DMs**')
