@@ -123,7 +123,7 @@ async def qr(ctx,*,content,member:discord.Member = None):
     embed = discord.Embed(title='Your Qr Code is Here',description=f'Qr code For link {content}',color=member.color,timestamps=ctx.message.created_at)
     img.save('QRcode.png')
     await member.send(embed=embed)
-    await member.send(file=discord.File('MyQRCode1.png'))
+    await member.send(file=discord.File('QRcode.png'))
     await asyncio.sleep(1)
     img.delete('QRcode.png')
     
