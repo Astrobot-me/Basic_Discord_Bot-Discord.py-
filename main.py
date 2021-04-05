@@ -23,7 +23,7 @@ async def on_ready():
     print(" Bot is ready")
 
 @client.event
-async def on_member_join():
+async def on_member_join(None):
     member_joinchannel = client.get_channel(828623138304163881)
     embed = discord.Embed(title='**Welcome to the Calender Official**')
     await member_joinchannel.send(embed=embed)
@@ -114,7 +114,7 @@ async def convcurr(ctx,arg1,arg2,*,amount):
 
 
 @client.command(aliases=["hlp"])
-async def h(ctx):
+async def help(ctx):
     embed = discord.Embed(title=':grey_question: HELP :grey_question: ',description="HELP commands:grey_question: ",color=discord.Color.blurple())
     embed.add_field(name='Help Prefix',value='#',inline=False)
     embed.add_field(name='help commands',value='kick,hlp,greet,flc,rld,game,clr,box,magic ball',inline=False)
