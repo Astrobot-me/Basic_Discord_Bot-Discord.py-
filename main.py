@@ -17,9 +17,16 @@ dice = ['1','2','3','4','5']
 magic_ball = ['As I see it, yes.','Ask again later','Better not tell you now','Cannot predict now','Concentrate and ask again','Dont count on it','It is certain','It is decidedly so',"Hell No!"]
 @client.event
 async def on_ready():
+    botonline_channel = client.get_channel(828622524552183809)
+    embed = discord.Embed(title='I am Online',color=discord.Color.blurple())
+    await botonline_channel.send(embed=embed)
     print(" Bot is ready")
 
-
+@client.event()
+async def on_member_join():
+    member_joinchannel = client.get_channel(828623138304163881)
+    embed = discord.Embed(title='**Welcome to the Calender Official**')
+    await member_joinchannel.send(embed=embed)
 #print(x)
 
 #discod presense
@@ -92,10 +99,6 @@ async def clear(ctx,amount=2):
   #  embed.add_field(name="User Name",value=member.name,inline=True)
    # await ctx.send(embed=embed)
     
-@client.command(aliases=['box'])
-async def Box(ctx):
-    a = random.choice(dice)
-    await ctx.send(a)
 
 
 @client.command(aliases=["hlp"])
@@ -109,7 +112,7 @@ async def h(ctx):
 
 
 @client.command(aliases=['qrcode'])
-async def qr(ctx,member:discord.Member = None,*,content):
+async def qr(ctx,*,content,member:discord.Member = None):
     member = ctx.author if not member else member
     await ctx.channel.purge(limit = 1)
     await ctx.send('**CHECK YOUR DMs**')
@@ -118,11 +121,11 @@ async def qr(ctx,member:discord.Member = None,*,content):
     qr.add_data(data)
     img = qr.make_image(fill_color='white',back_color='black')
     embed = discord.Embed(title='Your Qr Code is Here',description=f'Qr code For link {content}',color=member.color,timestamps=ctx.message.created_at)
-    img.save('MyQRCode1.png')
+    img.save('QRcode.png')
     await member.send(embed=embed)
     await member.send(file=discord.File('MyQRCode1.png'))
     await asyncio.sleep(1)
-    img.delete('MyQRCode1.png')
+    img.delete('QRcode.png')
     
 
 @client.command()
