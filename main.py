@@ -26,7 +26,7 @@ async def on_ready():
 async def ch_pr():
     await client.wait_until_ready()
     x =  'On '+str(len(client.guilds)) + ' Servers'
-    statues = ['Discord.py',x,'help || prefix-+','Under Development','Sleeping','Version - 0.7']
+    statues = ['Discord.py',x,'help || prefix-'+'','Under Development','Sleeping','Version - 0.8']
     
     while not client.is_closed():
         status = random.choice(statues)
@@ -111,6 +111,7 @@ async def h(ctx):
 @client.command(aliases=['qrcode'])
 async def qr(ctx,member:discord.Member=None,*,content):
     member = ctx.author if not member else member
+    await ctx.channel.purge(limit = 1)
     await ctx.send('**CHECK YOUR DMs**')
     data=content
     qr = qrcode.QRCode(version=1,box_size=10,border=5)
@@ -124,8 +125,11 @@ async def qr(ctx,member:discord.Member=None,*,content):
     img.delete('MyQRCode1.png')
     
 
-   
-
+@client.command()
+async def invite(ctx,member:discord.Member):
+    member = ctx.author if not member else member
+    new = discord.Embed(title='INVITE ME',description='**Here is the Link\n** https://discord.com/api/oauth2/authorize?client_id=816994265388417034&permissions=2081422583&scope=bot') 
+    await member.send(embed=new)
 
 
 
