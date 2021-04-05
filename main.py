@@ -104,8 +104,11 @@ async def clear(ctx,amount=2):
     
 @client.command(aliases=['CC'])
 async def convcurr(ctx,arg1,arg2,*,amount):
-    value = c.convert(amount,arg1,arg2)
+    curr1 = arg1.upper()
+    curr2 = arg2.upper()
+    value = c.convert(amount,curr1,curr2)
     await ctx.send(value)
+
 
 
 
