@@ -103,7 +103,7 @@ async def clear(ctx,amount=2):
    # await ctx.send(embed=embed)
     
 @client.command(aliases=['CC'])
-async def convcurr(ctx,*,arg1,*,arg2,*,amount):
+async def convcurr(ctx,arg1,arg2,*,amount):
     value = c.convert(amount,arg1,arg2)
     await ctx.send(value)
 
