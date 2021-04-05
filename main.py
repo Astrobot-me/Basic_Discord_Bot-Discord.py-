@@ -119,7 +119,7 @@ async def convcurr(ctx,arg1,arg2,*,amount):
 
 
 @client.command(aliases=["hlp"])
-async def help(ctx):
+async def h(ctx):
     embed = discord.Embed(title=':grey_question: HELP :grey_question: ',description="HELP commands:grey_question: ",color=discord.Color.blurple())
     embed.add_field(name='Help Prefix',value='#',inline=False)
     embed.add_field(name='help commands',value='kick,hlp,greet,flc,rld,game,clr,box,magic ball',inline=False)
