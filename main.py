@@ -126,7 +126,7 @@ async def qr(ctx,member:discord.Member=None,*,content):
     
 
 @client.command()
-async def invite(ctx,member:discord.Member):
+async def invite(ctx,member:discord.Member = None):
     member = ctx.author if not member else member
     new = discord.Embed(title='INVITE ME',description='**Here is the Link\n** https://discord.com/api/oauth2/authorize?client_id=816994265388417034&permissions=2081422583&scope=bot') 
     await member.send(embed=new)
