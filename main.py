@@ -108,10 +108,10 @@ async def convcurr(ctx,arg1,arg2,*,amount):
     curr2 = arg2.upper()
     value = c.convert(amount,curr1,curr2)
     embed = discord.Embed(title='Currency Converter',color=discord.Color.gold())
-    embed.add_field(name=f'Currency You are Converting From {curr1}',inline=False)
-    embed.add_field(name=f'Currency You are Converting to {curr2}',inline=False)
-    embed.add_field(name=f'Currency Amount:- {amount}',inline=False)
-    embed.add_field(name=f'{curr1} values {value} {curr2} in {curr2} ',inline=False)
+    embed.add_field(name='Currency You are Converting From:-',value=curr1,inline=False)
+    embed.add_field(name='Currency You are Converting to :-',value=curr2,inline=False)
+    embed.add_field(name='Currency Amount:-',value=amount,inline=False)
+    embed.add_field(name=f'Value of {amount} {curr1} in {curr2}:-',value=value,inline=False)
     await ctx.send(embed=embed)
 
 
