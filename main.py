@@ -22,7 +22,7 @@ async def on_ready():
     await botonline_channel.send(embed=embed)
     print(" Bot is ready")
 
-@client.event()
+@client.event
 async def on_member_join():
     member_joinchannel = client.get_channel(828623138304163881)
     embed = discord.Embed(title='**Welcome to the Calender Official**')
