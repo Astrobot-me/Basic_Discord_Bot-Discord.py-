@@ -25,7 +25,8 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     member_joinchannel = client.get_channel(828623138304163881)
-    embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.mention}')
+    embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.display_name}')
+    embed.set_image(url=member.avatar_url)
     await member_joinchannel.send(embed=embed)
 #print(x)
 
@@ -75,7 +76,7 @@ async def rld(ctx):
 
 
 @client.command(aliases=['Flc'])
-async def flc(ctx):
+async def fleep(ctx):
     c = random.choice(coin)
     embed = discord.Embed(title='Fliping a Coin',description="Try your Luck",color=discord.Color.dark_orange())
     embed.set_thumbnail(url='https://image.freepik.com/free-vector/dollar_53876-25498.jpg')
@@ -102,12 +103,13 @@ async def clear(ctx,amount=2):
   #  embed.add_field(name="User Name",value=member.name,inline=True)
    # await ctx.send(embed=embed)
     
-@client.command(aliases=['CC'])
+@client.command(aliases=['CC'],help='it convert the given currency to other currncy [currency1] [currency2] [amount]')
 async def convcurr(ctx,arg1,arg2,*,amount):
     curr1 = arg1.upper()
     curr2 = arg2.upper()
     value = c.convert(amount,curr1,curr2)
     embed = discord.Embed(title='Currency Converter',color=discord.Color.gold())
+    embed.set_thumbnail(url='https://image.freepik.com/free-vector/indian-rupee-currency-exchange_23-2148002764.jpg')
     embed.add_field(name='Currency You are Converting From:-',value=curr1,inline=False)
     embed.add_field(name='Currency You are Converting to :-',value=curr2,inline=False)
     embed.add_field(name='Currency Amount:-',value=amount,inline=False)
@@ -148,7 +150,9 @@ async def qr(ctx,*,content,member:discord.Member = None):
 @client.command()
 async def invite(ctx,member:discord.Member = None):
     member = ctx.author if not member else member
+    await ctx.send('**CHECK DMs**')
     new = discord.Embed(title='INVITE ME',description='**Here is the Link\n** https://discord.com/api/oauth2/authorize?client_id=816994265388417034&permissions=2081422583&scope=bot') 
+    embed.set_footer(text=f"Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
     await member.send(embed=new)
 
 
