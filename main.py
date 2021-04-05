@@ -4,8 +4,8 @@ import random
 import asyncio
 import qrcode
 import PIL
-
-
+from currency_converter import CurrencyConverter
+c = CurrencyConverter()
 
 
 
@@ -93,8 +93,8 @@ async def clear(ctx,amount=2):
     embed = discord.Embed(title='Deleting Messages',description='Messages Deleted Succesfully',color=discord.Color.dark_magenta())
     await ctx.channel.purge(limit = amount)
     await ctx.send(embed=embed)
-    await asyncio.sleep(2)
-    await ctx.channel.purge(limit = 1)
+    await asyncio.sleep(2)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    await ctx.channel.purge(limit = 1)                                                                                                                                                                                                                                                                  
 
 #@client.command()
 #async def userinfo(ctx,member : discord.Member = *):
@@ -102,6 +102,12 @@ async def clear(ctx,amount=2):
   #  embed.add_field(name="User Name",value=member.name,inline=True)
    # await ctx.send(embed=embed)
     
+@client.command(aliases=['CC'])
+async def convcurr(ctx,*,arg1,*,arg2,*,amount):
+    value = c.convert(amount,arg1,arg2)
+    await ctx.send(value)
+
+
 
 
 @client.command(aliases=["hlp"])
