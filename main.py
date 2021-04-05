@@ -50,6 +50,7 @@ async def kick(ctx,member : discord.Member,*,reason="No reason Provided"):
     embed.set_thumbnail(url=member.avatar_url)
     await member.kick(reason=reason)
     await ctx.send(embed=embed)
+    await member.send(reason)
     ###  await ctx.send(embed=embed)
 
 #utility part
@@ -92,6 +93,8 @@ async def clear(ctx,amount=2):
     embed = discord.Embed(title='Deleting Messages',description='Messages Deleted Succesfully',color=discord.Color.dark_magenta())
     await ctx.channel.purge(limit = amount)
     await ctx.send(embed=embed)
+    await asyncio.sleep(2)
+    await ctx.channel.purge(limit = 1)
 
 #@client.command()
 #async def userinfo(ctx,member : discord.Member = *):
