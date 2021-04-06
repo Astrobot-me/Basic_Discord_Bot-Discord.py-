@@ -18,9 +18,11 @@ magic_ball = ['As I see it, yes.','Ask again later','Better not tell you now','C
 @client.event
 async def on_ready():
     botonline_channel = client.get_channel(828622524552183809)
-    embed = discord.Embed(title='I am Online',color=discord.Color.blurple())
-    await botonline_channel.send(embed=embed)
-    print(" Bot is ready")
+    while True:
+        embed = discord.Embed(title='I am Online',color=discord.Color.blurple())
+        await botonline_channel.send(embed=embed)
+        await asyncio.sleep(3600)
+    print('Bot is Ready')
 
 @client.event
 async def on_member_join(member):
