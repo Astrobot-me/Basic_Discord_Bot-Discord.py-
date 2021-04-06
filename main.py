@@ -28,7 +28,8 @@ async def on_ready():
 async def on_member_join(member):
     member_joinchannel = client.get_channel(828623138304163881)
     embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.display_name} {member.mention}')
-    embed.set_image(url=member.avatar_url)
+    embed.set_thumbnail(url=member.avatar_url)
+    embed.set_image(url='https://image.freepik.com/free-vector/welcome-neon-sign-vector_53876-76088.jpg')
     await member_joinchannel.send(embed=embed)
 #print(x)
 
