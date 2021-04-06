@@ -27,7 +27,7 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     member_joinchannel = client.get_channel(828623138304163881)
-    embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.display_name}')
+    embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.display_name} {member.mention}')
     embed.set_image(url=member.avatar_url)
     await member_joinchannel.send(embed=embed)
 #print(x)
@@ -154,7 +154,7 @@ async def invite(ctx,member:discord.Member = None):
     member = ctx.author if not member else member
     await ctx.send('**CHECK DMs**')
     new = discord.Embed(title='INVITE ME',description='**Here is the Link\n** https://discord.com/api/oauth2/authorize?client_id=816994265388417034&permissions=2081422583&scope=bot') 
-    embed.set_footer(text=f"Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
+    new.set_footer(text=f"Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
     await member.send(embed=new)
 
 
@@ -191,7 +191,7 @@ async def userinfo(ctx, member: discord.Member = None):
     embed.add_field(name='Created at:',value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
     embed.add_field(name='Joined at:',value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
     embed.add_field(name=f'Roles ({len(roles)})',value=" ".join([role.mention for role in roles]),inline=False)
-    #embed.add_field(name=f'{member.mention} has permissions to mangage server?',value=discord.manage_guild(),inline=False)
+    embed.add_field(name=f'{member.mention} has permissions to mangage server?',value=ctx.discord.manage_guild(),inline=False)
     #embed.add_field(name=f'{member.member} can manage server roles?', value=discord.manage_roles(),inline=False)
     #embed.add_field(name=f'{member.member} is on mobile discord?', value=member.is_on_mobile,inline=False)
     embed.add_field(name='Most Prior Role:',value=member.top_role.mention,inline=False)
