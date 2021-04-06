@@ -18,11 +18,11 @@ magic_ball = ['As I see it, yes.','Ask again later','Better not tell you now','C
 @client.event
 async def on_ready():
     botonline_channel = client.get_channel(828622524552183809)
+    print('Bot is Ready')
     while True:
         embed = discord.Embed(title='I am Online',color=discord.Color.blurple())
         await botonline_channel.send(embed=embed)
         await asyncio.sleep(3600)
-    print('Bot is Ready')
 
 @client.event
 async def on_member_join(member):
@@ -191,7 +191,7 @@ async def userinfo(ctx, member: discord.Member = None):
     embed.add_field(name='Created at:',value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
     embed.add_field(name='Joined at:',value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p IST"),inline=False)
     embed.add_field(name=f'Roles ({len(roles)})',value=" ".join([role.mention for role in roles]),inline=False)
-    embed.add_field(name=f'{member.mention} has permissions to mangage server?',value=ctx.member.manage_guild(),inline=False)
+    #embed.add_field(name=f'{member.mention} has permissions to mangage server?',value=ctx.member.manage_guild(),inline=False)
     #embed.add_field(name=f'{member.member} can manage server roles?', value=discord.manage_roles(),inline=False)
     #embed.add_field(name=f'{member.member} is on mobile discord?', value=member.is_on_mobile,inline=False)
     embed.add_field(name='Most Prior Role:',value=member.top_role.mention,inline=False)
