@@ -223,10 +223,10 @@ async def wikisearch(ctx,search):
 
     result_embed = discord.Embed(title='Showing Results',color=discord.Color.dark_theme())
     result_embed.set_footer(text=f"Showing Results Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
-    if one == '1️⃣':
+    if author.React == '1️⃣':
         page_result = wikipedia.page(serch_result[0])
         result_embed.add_field(name='Title',value=page_result.title,inline=False)
-        result_embed.add_field(name='Content',value=page_result.content,inline=False)
+        #result_embed.add_field(name='Content',value=page_result.content,inline=False)
         result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
         await ctx.send(embed=result_embed)
     elif two == '2️⃣':
