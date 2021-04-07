@@ -228,7 +228,7 @@ async def wikisearch(ctx,search):
         return user == ctx.author and str(reaction.emoji) in ["1️⃣", "2️⃣","3️⃣","4️⃣","5️⃣"]
 
     try:
-        reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
+        reaction, user = await client.wait_for("reaction_add", timeout=60, check=check)
 
         if str(reaction.emoji) == '1️⃣':
             result = wikipedia.page(serch_result[0])
