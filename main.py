@@ -5,6 +5,7 @@ import asyncio
 import qrcode
 import PIL
 from currency_converter import CurrencyConverter
+import wikipedia
 c = CurrencyConverter()
 
 
@@ -27,10 +28,11 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     member_joinchannel = client.get_channel(828623138304163881)
-    embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.display_name} {member.mention}')
+    embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.display_name} {member.id}')
     embed.set_thumbnail(url=member.avatar_url)
-    embed.set_image(url='https://image.freepik.com/free-vector/welcome-neon-sign-vector_53876-76088.jpg')
+    #embed.set_image(url='https://image.freepik.com/free-vector/welcome-neon-sign-vector_53876-76088.jpg')
     await member_joinchannel.send(embed=embed)
+    
 #print(x)
 
 #discod presense
@@ -200,12 +202,68 @@ async def userinfo(ctx, member: discord.Member = None):
     
     await ctx.send(embed=embed)
 
+@client.command(aliases=['wiki'])
+async def wikisearch(ctx,search):
+    serch_result = wikipedia.search(search,results=5)
+    serch_embed = discord.Embed(title='WikiPedia Search',descrptions='React To See more about that',timestamps=ctx.message.created_at,color=discord.Color.dark_gray())
+    serch_embed.set_footer(text=f"Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
+    serch_embed.set_thumbnail(url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvWUVmzipFoMLQkshKJ57TGcjeyxCPo05paA&usqp=CAU')
+    serch_embed.add_field(name='**Result ** :one:',value=serch_result[0],inline=False)
+    serch_embed.add_field(name='**Result ** :two:',value=serch_result[1],inline=False)
+    serch_embed.add_field(name='**Result ** :three:',value=serch_result[2],inline=False)
+    serch_embed.add_field(name='**Result ** :four:',value=serch_result[3],inline=False)
+    serch_embed.add_field(name='**Result ** :five:',value=serch_result[4],inline=False)
+    serch_mess = await ctx.send(embed=serch_embed)
+    one = await serch_mess.add_reaction('1️⃣')
+    two = await serch_mess.add_reaction('2️⃣')
+    three = await serch_mess.add_reaction('3️⃣')
+    four = await serch_mess.add_reaction('4️⃣')
+    five = await serch_mess.add_reaction('5️⃣')
 
-#async def on_member_join(self, member):
- #       guild = member.guild
-   #     if guild.system_channel is not None:
-    #        to_send = 'Welcome {0.mention} to {1.name}!'.format(member, guild)
-     #       await guild.system_channel.send(to_send)
+
+    result_embed = discord.Embed(title='Showing Results',color=discord.Color.dark_theme())
+    result_embed.set_footer(text=f"Showing Results Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
+    if one == '1️⃣':
+        page_result = wikipedia.page(serch_result[0])
+        result_embed.add_field(name='Title',value=page_result.title,inline=False)
+        result_embed.add_field(name='Content',value=page_result.content,inline=False)
+        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+    elif two == '2️⃣':
+        page_result = wikipedia.page(serch_result[1])
+        result_embed.add_field(name='Title',value=page_result.title,inline=False)
+        result_embed.add_field(name='Content',value=page_result.content,inline=False)
+        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+    elif three == '3️⃣':
+        page_result = wikipedia.page(serch_result[2])
+        result_embed.add_field(name='Title',value=page_result.title,inline=False)
+        result_embed.add_field(name='Content',value=page_result.content,inline=False)
+        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+    elif four == '4️⃣':
+        page_result = wikipedia.page(serch_result[3])
+        result_embed.add_field(name='Title',value=page_result.title,inline=False)
+        result_embed.add_field(name='Content',value=page_result.content,inline=False)
+        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+    else:
+        page_result = wikipedia.page(serch_result[4])
+        result_embed.add_field(name='Title',value=page_result.title,inline=False)
+        result_embed.add_field(name='Content',value=page_result.content,inline=False)
+        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+    await ctx.send(embed=result_embed)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
