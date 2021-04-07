@@ -225,7 +225,7 @@ async def wikisearch(ctx,search):
     result_embed.set_footer(text=f"Showing Results Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
     
     def chk(reaction, user):
-        return reaction.serch_mess == serch_mess and reaction.channel == ctx.channel and user == ctx.author
+        return reaction.channel == ctx.channel and user == ctx.author
     react, user = await client.wait_for('reaction_add', check=chk)
 
     if react == '1️⃣':
