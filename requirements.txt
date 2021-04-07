@@ -3,3 +3,4 @@ discord==1.0.1
 qrcode==6.1
 Pillow==8.2.0
 CurrencyConverter==0.16
+wikipedia==1.4.0
