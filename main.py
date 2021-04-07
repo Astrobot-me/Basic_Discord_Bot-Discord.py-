@@ -223,44 +223,41 @@ async def wikisearch(ctx,search):
 
     result_embed = discord.Embed(title='Showing Results',color=discord.Color.dark_theme())
     result_embed.set_footer(text=f"Showing Results Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
-    if ctx.React == '1️⃣':
-        page_result = wikipedia.page(serch_result[0])
-        result_embed.add_field(name='Title',value=page_result.title,inline=False)
-        #result_embed.add_field(name='Content',value=page_result.content,inline=False)
-        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+    
+    def chk(reaction, user):
+        return reaction.serch_mess == serch_mess and reaction.channel == ctx.channel and user == ctx.author
+    react, user = await client.wait_for('reaction_add', check=chk)
+
+    if react == '1️⃣':
+        result = wikipedia.page(serch_result[0])
+        result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
+        result_embed.add_field(name='Content',value=result.content,inline=False)
+        result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
+        await ctx.send(embed=result_embed)   
+    elif react == '2️⃣':
+        result = wikipedia.page(serch_result[1])
+        result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
+        result_embed.add_field(name='Content',value=result.content,inline=False)
+        result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
         await ctx.send(embed=result_embed)
-    elif two == '2️⃣':
-        page_result = wikipedia.page(serch_result[1])
-        result_embed.add_field(name='Title',value=page_result.title,inline=False)
-        result_embed.add_field(name='Content',value=page_result.content,inline=False)
-        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+    elif react == '3️⃣':
+        result = wikipedia.page(serch_result[2])
+        result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
+        result_embed.add_field(name='Content',value=result.content,inline=False)
+        result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
         await ctx.send(embed=result_embed)
-    elif three == '3️⃣':
-        page_result = wikipedia.page(serch_result[2])
-        result_embed.add_field(name='Title',value=page_result.title,inline=False)
-        result_embed.add_field(name='Content',value=page_result.content,inline=False)
-        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
-        await ctx.send(embed=result_embed)
-    elif four == '4️⃣':
-        page_result = wikipedia.page(serch_result[3])
-        result_embed.add_field(name='Title',value=page_result.title,inline=False)
-        result_embed.add_field(name='Content',value=page_result.content,inline=False)
-        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+    elif react == '4️⃣':
+        result = wikipedia.page(serch_result[3])
+        result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
+        result_embed.add_field(name='Content',value=result.content,inline=False)
+        result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
         await ctx.send(embed=result_embed)
     else:
-        page_result = wikipedia.page(serch_result[4])
-        result_embed.add_field(name='Title',value=page_result.title,inline=False)
-        result_embed.add_field(name='Content',value=page_result.content,inline=False)
-        result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+        result = wikipedia.page(serch_result[4])
+        result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
+        result_embed.add_field(name='Content',value=result.content,inline=False)
+        result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
         await ctx.send(embed=result_embed)
-
-
-
-
-
-
-
-
 
 
 
