@@ -224,8 +224,8 @@ async def wikisearch(ctx,search):
     result_embed = discord.Embed(title='Showing Results',color=discord.Color.dark_theme())
     result_embed.set_footer(text=f"Showing Results Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
     
-    def chk(reaction, user):
-        return ctx.author.channel == ctx.channel and user == ctx.author
+    def chk(reactions, user):
+        return reactions.serch_mess == serch_mess and ctx.author.channel == ctx.channel and user == ctx.author
     react, user = await client.wait_for('reaction_add', check=chk)
 
     if react == '1️⃣':
