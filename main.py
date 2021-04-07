@@ -228,27 +228,31 @@ async def wikisearch(ctx,search):
         result_embed.add_field(name='Title',value=page_result.title,inline=False)
         result_embed.add_field(name='Content',value=page_result.content,inline=False)
         result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+        await ctx.send(embed=result_embed)
     elif two == '2️⃣':
         page_result = wikipedia.page(serch_result[1])
         result_embed.add_field(name='Title',value=page_result.title,inline=False)
         result_embed.add_field(name='Content',value=page_result.content,inline=False)
         result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+        await ctx.send(embed=result_embed)
     elif three == '3️⃣':
         page_result = wikipedia.page(serch_result[2])
         result_embed.add_field(name='Title',value=page_result.title,inline=False)
         result_embed.add_field(name='Content',value=page_result.content,inline=False)
         result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+        await ctx.send(embed=result_embed)
     elif four == '4️⃣':
         page_result = wikipedia.page(serch_result[3])
         result_embed.add_field(name='Title',value=page_result.title,inline=False)
         result_embed.add_field(name='Content',value=page_result.content,inline=False)
         result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
+        await ctx.send(embed=result_embed)
     else:
         page_result = wikipedia.page(serch_result[4])
         result_embed.add_field(name='Title',value=page_result.title,inline=False)
         result_embed.add_field(name='Content',value=page_result.content,inline=False)
         result_embed.add_field(name='Link to the article',value=page_result.url,inline=False)
-    await ctx.send(embed=result_embed)
+        await ctx.send(embed=result_embed)
 
 
 
