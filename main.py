@@ -226,7 +226,7 @@ async def wikisearch(ctx,search):
     
     def chk(reactions, user):
         return reactions.serch_mess == serch_mess and ctx.author.channel == ctx.channel and user == ctx.author
-    react, user = await client.wait_for('reaction_add', check=chk)
+    react, user = await client.wait_for(add_reaction,check=chk)
 
     if react == '1️⃣':
         result = wikipedia.page(serch_result[0])
