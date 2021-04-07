@@ -224,29 +224,28 @@ async def wikisearch(ctx,search):
     result_embed = discord.Embed(title='Showing Results',color=discord.Color.dark_theme())
     result_embed.set_footer(text=f"Showing Results Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
     
-    def chk(reactions, user):
-        return reactions.serch_mess == serch_mess and ctx.author.channel == ctx.channel and user == ctx.author
-    react, user = await client.wait_for(add_reaction,check=chk)
+    def check(reaction, user):
+        return user == ctx.author and str(reaction.emoji) in ["1️⃣", "2️⃣","3️⃣","4️⃣","5️⃣"]
 
-    if react == '1️⃣':
+    if str(reaction.emoji) == '1️⃣':
         result = wikipedia.page(serch_result[0])
         result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
         result_embed.add_field(name='Content',value=result.content,inline=False)
         result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
         await ctx.send(embed=result_embed)   
-    elif react == '2️⃣':
+    elif str(reaction.emoji) == '2️⃣':
         result = wikipedia.page(serch_result[1])
         result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
         result_embed.add_field(name='Content',value=result.content,inline=False)
         result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
         await ctx.send(embed=result_embed)
-    elif react == '3️⃣':
+    elif str(reaction.emoji) == '3️⃣':
         result = wikipedia.page(serch_result[2])
         result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
         result_embed.add_field(name='Content',value=result.content,inline=False)
         result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
         await ctx.send(embed=result_embed)
-    elif react == '4️⃣':
+    elif str(reaction.emoji) == '4️⃣':
         result = wikipedia.page(serch_result[3])
         result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
         result_embed.add_field(name='Content',value=result.content,inline=False)
