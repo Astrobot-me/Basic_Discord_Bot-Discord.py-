@@ -221,57 +221,193 @@ async def wikisearch(ctx,search):
     await serch_mess.add_reaction('5️⃣')
 
 
-    result_embed = discord.Embed(title='Showing Results',color=discord.Color.dark_theme())
+    result_embed = discord.Embed(title='Showing Results',color=discord.Color.dark_red())
     result_embed.set_footer(text=f"Showing Results Requested By {ctx.author}",icon_url=ctx.author.avatar_url)
     
     def check(reaction, user):
         return user == ctx.author and str(reaction.emoji) in ["1️⃣", "2️⃣","3️⃣","4️⃣","5️⃣"]
 
     try:
-        reaction, user = await client.wait_for("reaction_add", timeout=60, check=check)
+        reaction, user = await client.wait_for("reaction_add", timeout=10, check=check)
 
         if str(reaction.emoji) == '1️⃣':
             result = wikipedia.page(serch_result[0])
-            content = wikipedia.summary(result)
+            content = result.content
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
-            result_embed.set_image(url=result.images[0])
+            try:
+                result_embed.set_image(url=result.images[0])
+            except:
+                result_embed.set_image(url=result.images[1])
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)   
         elif str(reaction.emoji) == '2️⃣':
             result = wikipedia.page(serch_result[1])
-            content = wikipedia.summary(result)
+            content = result.content
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
-            result_embed.set_image(url=result.images[0])
+            try:
+                result_embed.set_image(url=result.images[0])
+            except:
+                result_embed.set_image(url=result.images[1])
+
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)
         elif str(reaction.emoji) == '3️⃣':
             result = wikipedia.page(serch_result[2])
-            content = wikipedia.summary(result)
+            content = result.content
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
-            result_embed.set_image(url=result.images[0])
+            try:
+                result_embed.set_image(url=result.images[0])
+            except:
+                result_embed.set_image(url=result.images[1])
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)
         elif str(reaction.emoji) == '4️⃣':
             result = wikipedia.page(serch_result[3])
-            content = wikipedia.summary(result)
+            content = result.content
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
-            result_embed.set_image(url=result.images[0])
+            try:
+                result_embed.set_image(url=result.images[0])
+            except:
+                result_embed.set_image(url=result.images[1])
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)
         else:
             result = wikipedia.page(serch_result[4])
-            content = wikipedia.summary(result)
+            content = result.content
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
-            result_embed.set_image(url=result.images[0])
+            try:
+                result_embed.set_image(url=result.images[0])
+            except:
+                result_embed.set_image(url=result.images[1])
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)
     except asyncio.TimeoutError:
-        ctx.send('**Time out**')
+        await ctx.send('**Time out**')
+
+
+@client.command(aliases=['ngg'])
+async def number_guess(ctx):
+    chanses = 3
+    choice = random.randint(1,101)
+    start_embed = discord.Embed(title='NUMBER GUESSING GAME',description="This is a Number Guessing game,\n**RULES**\n1). It will give Various Hints so you can guess the number correctly\n2). You have 3 chanses to guess correctly",color=discord.Color.orange())
+    await ctx.send(embed=start_embed)
+    await asyncio.sleep(2)
+    await ctx.send('**NUMBER CHOOSEN**')
+    hint_embed = discord.Embed(title='HINTS',description='Read Hints Carefully',color=discord.Color.orange())
+    if int(choice) in range(0,11):
+        if int(choice) in range(1,6):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 1 to 5',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 6 to 10',inline=False)
+    elif int(choice) in range(11,21):
+        if int(choice) in range(11, 16):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 11 to 15',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 16 to 20',inline=False)
+    elif int(choice) in range(21,31):
+        if int(choice) in range(21,26):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 21 to 25',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 26 to 30',inline=False)
+    elif int(choice) in range(31,41):
+        if int(choice) in range(31,36):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 31 to 35',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 36 to 40',inline=False)
+    elif int(choice) in range(41,51):
+        if int(choice) in range(41,46):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 41 to 45',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 46 to 50',inline=False)
+    elif int(choice) in range(51,61):
+        if int(choice) in range(51,56):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 51 to 55',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 56 to 60',inline=False)
+    elif int(choice) in range(61,71):
+        if int(choice) in range(61,66):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 61 to 65',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 66 to 70',inline=False)
+    elif int(choice) in range(71,81):
+        if int(choice) in range(71,76):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 71 to 75',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 76 to 80',inline=False)
+    elif int(choice) in range(81,91):
+        if int(choice) in range(81,86):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 81 to 85',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 86 to 90',inline=False)
+    else:
+        if int(choice) in range(91,96):
+            hint_embed.add_field(name='Range Hint:',value='Number is between 90 to 95',inline=False)
+        else:
+            hint_embed.add_field(name='Range Hint:',value='Number is between 96 to 100',inline=False)
+    
+
+    c = 1
+    for x in range(2, int(choice / 2)):
+        if int(choice) % x == 0:
+            c = 0
+            pass
+    
+    if c == 1:
+        hint_embed.add_field(name='Prime Number Hint:',value="True",inline=False)
+    else:
+        hint_embed.add_field(name='Prime Number Hint:',value="False",inline=False)
+
+    if int(choice)%2 == 0:
+        hint_embed.add_field(name='ODD or EVEN Hint:',value="Even",inline=False)
+    else:
+        hint_embed.add_field(name='ODD or EVEN Hint:',value="Odd",inline=False)
+    
+    await ctx.send(embed=hint_embed)
+    await asyncio.sleep(2)
+    await ctx.send("**Start Guessing**")
+
+    try:
+        def check(msg):
+            return msg.author == ctx.author and msg.channel == ctx.channel
+
+        #user_choice = (await client.wait_for('message', check=check,timeout=60)).content
+        while chanses > 0:
+            user_choice = (await client.wait_for('message', check=check,timeout=60)).content
+            if user_choice==str(choice):
+                await ctx.send('**You are Lucky this Time!You Guessed Right**')
+                await ctx.send("**The Number Was :-**"+ str(choice))
+                break
+            else:
+                await ctx.send("**'Try Again! Read Hints Carefully'**")
+                chanses = chanses-1
+
+            life = discord.Embed(title=f'Life Remaining {chanses}',color=discord.Color.orange())
+            await ctx.send(embed=life)
+    except asyncio.TimeoutError:
+        await ctx.send('Timed Out')
+    
+    
+
+    if chanses==3:
+        title = "You are born Genius"
+    elif chanses==2:
+        title =  "You are like a Rookie Detective"
+    elif chanses==1:
+        title =  "You Won"
+    else:
+        title = 'Game OVER! You Loose'
+        no = discord.Embed(title=f"The Number Was: {choice}",color=discord.Color.orange())
+        await ctx.send(embed=no)
+        
+    r_embed = discord.Embed(title=title,color=discord.Color.orange())
+
+    
+    await ctx.send(embed=r_embed)
 
 
 
