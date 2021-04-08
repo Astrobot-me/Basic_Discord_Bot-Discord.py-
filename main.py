@@ -449,7 +449,7 @@ async def game(context):
 
     try:
         def check(msg):
-            return msg.author == ctx.author and msg.channel == ctx.channel
+            return msg.author == context.author and msg.channel == context.channel
 
         while (i <= 6):
 
