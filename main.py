@@ -448,11 +448,13 @@ async def game(context):
 
 
     try:
+        def check(msg):
+            return msg.author == ctx.author and msg.channel == ctx.channel
 
         while (i <= 6):
 
 
-            msg = await client.wait_for("message", timeout=30 , check=lambda message: message.author == context.author and message.channel == context.channel and message.content)
+            msg = await client.wait_for("message", timeout=30 , check=check)
 
             choice = random.choice(list1)
 
@@ -598,7 +600,7 @@ async def game(context):
     #  Bot will terminate the process if no input is received from the user
     except asyncio.TimeoutError:
         await sent.delete()
-        embed = discord.Embed(title="Terminating the game due to timeout , Respond in Time lol",description=None,color=discord.Color.dark_magenta)
+        embed = discord.Embed(title="Terminating the game due to timeout , Respond in Time lol",description=None,color=discord.Color.dark_magenta())
         await context.send(embed=embed)
 
 
