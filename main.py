@@ -409,13 +409,6 @@ async def number_guess(ctx):
     
     await ctx.send(embed=r_embed)
 
-@client.command(aliases=['t'])
-async def timer(ctx,time : int):
-    #time_embed = discord.Embed(title=f'**-{time}--**',color=discord.Color.purple())
-    mess = await ctx.send(f'**{time} Seconds**')
-    for t in range(-time,1):
-        await mess.edit(content=f"**{t} Seconds**")
-    await ctx.send('Timer Ended')
 
 
 
