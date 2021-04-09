@@ -4,6 +4,9 @@ import random
 import asyncio
 import qrcode
 import PIL
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw 
 from currency_converter import CurrencyConverter
 import wikipedia
 c = CurrencyConverter()
@@ -151,6 +154,40 @@ async def qr(ctx,*,content,member:discord.Member = None):
     await asyncio.sleep(1)
     #img.delete('QRcode.png')
     
+@client.command()
+async def yesno(ctx,text):
+    img = Image.open("sirazee.jpg")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("sans2.ttf", 80)
+    t = text.split('/')
+    draw.text((720, 650),t[0],(0, 0, 0),font=font)
+    draw.text((720, 140),t[1],(0, 0, 0),font=font)
+    img.save('meme.png')
+    #meme_embed = discord.Embed(title=None,color=discord.Color.purple())
+    #meme_embed.set_image(url=meme)
+    #await ctx.send(embed=meme_embed)
+    await ctx.send(file=discord.File('meme.png'))
+
+
+@client.command()
+async def hit(ctx,text):
+    img = Image.open("traintruck.jpg")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("sans2.ttf", 80)
+    t = text.split('/')
+    draw.text((297, 950),t[0],(255, 255, 255),font=font)
+    draw.text((620, 120),t[1],(0, 0, 0),font=font)
+    img.save('meme.png')
+    #meme_embed = discord.Embed(title=None,color=discord.Color.purple())
+    #meme_embed.set_image(url=meme)
+    #await ctx.send(embed=meme_embed)
+    await ctx.send(file=discord.File('meme.png'))
+
+
+
+
+
+
 
 @client.command()
 async def invite(ctx,member:discord.Member = None):
