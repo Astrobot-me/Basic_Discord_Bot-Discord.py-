@@ -116,12 +116,13 @@ async def convcurr(ctx,arg1,arg2,*,amount):
     curr1 = arg1.upper()
     curr2 = arg2.upper()
     value = c.convert(amount,curr1,curr2)
+    term_decimal = "{:.2f}".format(value)
     embed = discord.Embed(title='Currency Converter',color=discord.Color.gold())
     embed.set_thumbnail(url='https://image.freepik.com/free-vector/indian-rupee-currency-exchange_23-2148002764.jpg')
     embed.add_field(name='Currency You are Converting From:-',value=curr1,inline=False)
     embed.add_field(name='Currency You are Converting to :-',value=curr2,inline=False)
     embed.add_field(name='Currency Amount:-',value=amount,inline=False)
-    embed.add_field(name=f'Value of {amount} {curr1} in {curr2}:-',value=value,inline=False)
+    embed.add_field(name=f'Value of {amount} {curr1} in {curr2}:-',value=term_decimal,inline=False)
     await ctx.send(embed=embed)
 
 
@@ -138,50 +139,9 @@ async def h(ctx):
 
 
 
-@client.command(aliases=['qrcode'])
-async def qr(ctx,*,content,member:discord.Member = None):
-    member = ctx.author if not member else member
-    await ctx.channel.purge(limit = 1)
-    await ctx.send('**CHECK YOUR DMs**')
-    data=content
-    qr = qrcode.QRCode(version=1,box_size=10,border=5)
-    qr.add_data(data)
-    img = qr.make_image(fill_color='white',back_color='black')
-    embed = discord.Embed(title='Your Qr Code is Here',description=f'Qr code For link {content}',color=member.color,timestamps=ctx.message.created_at)
-    img.save('QRcode.png')
-    await member.send(embed=embed)
-    await member.send(file=discord.File('QRcode.png'))
-    await asyncio.sleep(1)
-    #img.delete('QRcode.png')
-    
-@client.command()
-async def yesno(ctx,text):
-    img = Image.open("sirazee.jpg")
-    draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("sans2.ttf", 80)
-    t = text.split('/')
-    draw.text((720, 650),t[0],(0, 0, 0),font=font)
-    draw.text((720, 140),t[1],(0, 0, 0),font=font)
-    img.save('meme.png')
-    #meme_embed = discord.Embed(title=None,color=discord.Color.purple())
-    #meme_embed.set_image(url=meme)
-    #await ctx.send(embed=meme_embed)
-    await ctx.send(file=discord.File('meme.png'))
 
 
-@client.command()
-async def hit(ctx,text):
-    img = Image.open("traintruck.jpg")
-    draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("sans2.ttf", 80)
-    t = text.split('/')
-    draw.text((297, 950),t[0],(255, 255, 255),font=font)
-    draw.text((620, 120),t[1],(0, 0, 0),font=font)
-    img.save('meme.png')
-    #meme_embed = discord.Embed(title=None,color=discord.Color.purple())
-    #meme_embed.set_image(url=meme)
-    #await ctx.send(embed=meme_embed)
-    await ctx.send(file=discord.File('meme.png'))
+
 
 
 
@@ -448,197 +408,106 @@ async def number_guess(ctx):
 
 
 
+@client.command(aliases = ["stone_paper_scissors","rps"])
+async def sps(ctx):    #rps is short for rock, paper, scissor
+    emojis = ['✊', '🖐️', '✌️','❌']
+    myscore = 0
+    botscore = 0
+    embedVar = discord.Embed(title="STONE PAPER SCISSOR GAME",description = "Choose between rock, paper, or scissors, {}." . format(ctx.author.mention), color = 0xff9900)
+    embedVar.add_field(name=":fist: STONE", value="React with :fist: emoji to choose stone.", inline = False)
+    embedVar.add_field(name=":hand_splayed: PAPER", value="React with :hand_splayed: emoji to choose paper.", inline = False)
+    embedVar.add_field(name=":v: SCISSORS", value="React with :v: emoji to choose scissors.", inline = False)
+    embedVar.add_field(name='Rules',value='1).You or Calender Will Get 100 point for Each Winning\n2).50 Points for Tie\n3).TimeOut:- 20secs')
+    emb = await ctx.send(embed = embedVar)
 
-
-
-
-
-
-
-
-@client.command(aliases=['sps'])
-async def game(context):
     
 
-
-    i = 1
-    your_points = 0
-    computer_points = 0
-
-    list1 =  ["stone", "paper", "scissors"]
-
-
-
-    embed = discord.Embed(title="Stone paper scissor game", description="Timeout is of 30 seconds" ,color=discord.Color.dark_gold())
-
-    embed.add_field(name="Rules", value="**__Input should be in lowercase__**\n**__For Each winning you will Get 100points__**\n**__50 points for tie__**\n**__Spelling Should Be:- stone/paper/scissor__**", inline=False)
-
-    embed.add_field(name="Input your Choice", value="Stone/Paper/Scissor", inline=True)
-
-    embed.add_field(name="Your points", value="0", inline=True)
-
-    embed.add_field(name="Bots points", value="0", inline=True)
-
-    embed.add_field(name="Number of chances", value="6", inline=True)        #Loop runs 5 times
-
-    sent = await context.send(embed=embed)
-
-
+    def check(reaction, user):
+        return user == ctx.author and str(reaction.emoji) in ["✊", "🖐️","✌️","❌"]
+    list1 =  ["stone", "paper", "scissor"]
+    
     try:
-        def check(msg):
-            return msg.author == context.author and msg.channel == context.channel
-
-        while (i <= 6):
-
-
-            msg = await client.wait_for("message", timeout=30 , check=check)
-
-            choice = random.choice(list1)
+        while True:
+            play_embed = discord.Embed(title='React For Stone/Paper/Scissor',color = 0xff9900)
+            sent = await ctx.send(embed=play_embed)
+            for emoji in emojis:
+                await sent.add_reaction(emoji)
+            
+            reaction, user = await client.wait_for('reaction_add', check=check,timeout=20)
 
 
+            r_choice = random.choice(list1)
+            if str(reaction.emoji) == '✊':
+                await ctx.send('You Choose Stone')
+                await ctx.send(f'Calender Choose {r_choice}')
+                userchoice = 'stone'
+            elif str(reaction.emoji) == '🖐️':
+                await ctx.send('You Choose Paper')
+                await ctx.send(f'Calender Choose {r_choice}')
+                userchoice = 'paper'
+            elif str(reaction.emoji) == '✌️':
+                await ctx.send('You Choose Scissor')
+                await ctx.send(f'Calender Choose {r_choice}')
+                userchoice = 'scissor'
+            elif str(reaction.emoji) == '❌':
+                await ctx.send('**You Terminated the Game**')        
+                break
 
-            if msg.content == choice:
-
-
-                embed = discord.Embed(color=discord.Color.dark_gold())
-                your_points = your_points + 50
-                computer_points = computer_points +50
-
-
-
-                embed.add_field(name="Score", value=f"You choose {msg.content} and Calender choose {choice}", inline=False)
-                embed.add_field(name="Points", value="You Both Tried! Better Luck Next Time!", inline=False)
-                await context.send(embed=embed)
-
-
-            elif msg.content == 'stone' and choice == 'scissor':
-                your_points = your_points + 100
-
-                embed = discord.Embed(color=discord.Color.dark_gold())
-
-
-                embed.add_field(name="Score", value=f"You choose {msg.content} and Bot choose {choice}", inline=False)
-
-                embed.add_field(name="Points", value="You get 100 point", inline=False)
-
-                await context.send(embed=embed)
-
-            elif msg.content == 'scissor' and choice == 'stone':
-                computer_points = computer_points + 100
-
-                embed = discord.Embed(color=discord.Color.dark_gold())
-
-
-                embed.add_field(name="Score", value=f"You choose {msg.content} and Bot choose {choice}", inline=False)
-
-                embed.add_field(name="Points", value= "Bot gets 100 point", inline=False)
-
-
-                await context.send(embed=embed)
-
-            elif msg.content == 'paper' and choice == 'stone':
-                
-                your_points = your_points + 100
-
-                embed = discord.Embed(color=discord.Color.dark_gold())
-
-
-                embed.add_field(name="Score", value=f"You choose {msg.content} and Bot choose {choice}", inline=False)
-
-                embed.add_field(name="Points", value="You get 100 point", inline=False)
-
-                await context.send(embed=embed)
-
-            elif msg.content == 'stone' and choice == 'paper':
-                computer_points = computer_points + 100
-
-
-                embed = discord.Embed(color=discord.Color.dark_gold())
-
-
-
-                embed.add_field(name="Score", value=f"You chose {msg.content} and Bot chose {choice}", inline=False)
-
-                embed.add_field(name="Points", value="Bot gets 100 point", inline=False)
-
-                await context.send(embed=embed)
-
-            elif msg.content == 'scissor' and choice == 'paper':
-                your_points = your_points + 100
-
-
-                embed = discord.Embed(color=discord.Color.dark_gold())
-
-
-                embed.add_field(name="Score", value=f"You chose {msg.content} and Bot chose {choice}", inline=False)
-
-                embed.add_field(name="Points", value="You get 100 point", inline=False)
-
-                await context.send(embed=embed)
-
-            elif msg.content == 'paper' and choice == 'scissor':
-                computer_points = computer_points + 100
-
-
-
-                embed = discord.Embed(color=discord.Color.teal())
-
-
-                embed.add_field(name="Score", value=f"You chose {msg.content} and Bot chose {choice}", inline=False)
-
-                embed.add_field(name="Points", value="Bot gets 100 point", inline=False)
-
-
-                await context.send(embed=embed)
-
-
-
+            if r_choice == userchoice:
+                await ctx.send('its a tie')
+                myscore = myscore+50
+                botscore = botscore+50
+            elif userchoice == 'stone':
+                if r_choice == 'paper':
+                    await ctx.send('You are covered by the Bot! Bot wins')
+                    botscore=botscore+100
+                else:
+                    await ctx.send('Well Done Player! You Crushed the Bot')
+                    myscore=myscore+100
+            elif userchoice == 'paper':
+                if r_choice == 'scissor':
+                    await ctx.send('Bot Cut Down You in halves')
+                    botscore=botscore+100
+                else:
+                    await ctx.send('You covered the Bot')
+                    myscore=myscore+100
             else:
-                embed = discord.Embed(title="Invalid input",description="Try again! Input stone\paper\scissors", color=discord.Color.dark_gold())
+                if r_choice == 'stone':
+                    await ctx.send('Bot smashed You')
+                    botscore=botscore+100
+                else:
+                    await ctx.send('You Cut Down The Bot! You won')
+                    myscore=myscore+100
 
-                await context.send(embed=embed)
+            score_embed=discord.Embed(title='SCOREBOARD',color=0xff9900)
+            score_embed.add_field(name="Your Score",value=myscore)
+            score_embed.add_field(name='Calender Score',value=botscore)
+            await ctx.send(embed=score_embed)
 
+        if botscore>myscore:
+            title = 'Calender defeated You'
+        elif botscore==myscore:
+            title = 'Game tied'
+        else:
+            title = 'You Defeated Bot! you Won'
+        res_embed=discord.Embed(title=title,color=0xff9900)
+        res_embed.add_field(name='Your Total Score',value=myscore)
+        res_embed.add_field(name='Calender Total Score',value=botscore)
+        await ctx.send(embed=res_embed)
 
-                continue
-
-
-            embed = discord.Embed(color=discord.Color.dark_gold())
-            if 6 - i == 0:
-                embed.add_field(name="Chances left", value="0", inline=False)
-            else:
-                embed.add_field(name="Chances Left", value=f"{6-i}, Please input your choice again", inline=False)
-            await context.send(embed=embed)
-
-            i = i + 1
-
-        if i > 6:
-            # print("Game over""\n")
-            embed = discord.Embed(title="**__GAME OVER __**", color=discord.Color.dark_gold())
-            # await context.send("Game over")
-            await context.send(embed=embed)
-
-            embed = discord.Embed(title="Scorecard", color=discord.Color.dark_gold())
-            embed.add_field(name="Players Score", value=f"Your score:{your_points}\nBot's score:{computer_points}\n", inline=False)
-            if computer_points > your_points:
-                # print("The computer has won and you have lost")
-                embed.add_field(name="Final result", value=f"Bot has won and {context.author.mention} has lost", inline=False)
-                await context.send(embed=embed)
-            elif your_points > computer_points:
-                # print("You have won the round and the computer has lost ")
-                embed.add_field(name="Final result", value=f" {context.author.mention} has won and Bot has lost", inline=False)
-                await context.send(embed=embed)
-            else:
-                # print("It was a TIE")
-                embed.add_field(name="Final result", value="No One Won ! You Both are Noob!", inline=False)
-
-                await context.send(embed=embed)
-
-
-    #  Bot will terminate the process if no input is received from the user
     except asyncio.TimeoutError:
-        await sent.delete()
-        embed = discord.Embed(title="Terminating the game due to timeout , Respond in Time lol",description=None,color=discord.Color.dark_magenta())
-        await context.send(embed=embed)
+        await ctx.send('Terminating Game Due to Timeout')
+
+
+
+
+
+
+
+
+
+
+
 
 
 
