@@ -504,10 +504,10 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
                     
 
             score_embed=discord.Embed(title='SCOREBOARD',description=None,color=0xff9900)
-            score_embed.add_field(name="Your Score",value=myscore)
+            score_embed.add_field(name=ctx.author.name,value=myscore)
             score_embed.add_field(name='Calender Score',value=botscore)
             await ctx.send(embed=score_embed)
-
+            await asyncio.sleep(1)
         if botscore>myscore:
             title = 'Calender defeated You'
         elif botscore==myscore:
