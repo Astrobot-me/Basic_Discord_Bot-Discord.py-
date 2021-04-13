@@ -428,56 +428,80 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
     
     try:
         while True:
-            play_embed = discord.Embed(title='React For Stone/Paper/Scissor',color = 0xff9900)
+            play_embed = discord.Embed(title='React For Stone ✊/Paper 🖐️/Scissor ✌️/End ❌',color = 0xff9900)
             sent = await ctx.send(embed=play_embed)
             for emoji in emojis:
                 await sent.add_reaction(emoji)
             
-            reaction, user = await client.wait_for('reaction_add', check=check,timeout=20)
+            reaction, user = await client.wait_for('reaction_add', check=check,timeout=25)
 
 
             r_choice = random.choice(list1)
+            c_embed = discord.Embed(title='Choices',color=0xff9900)
             if str(reaction.emoji) == '✊':
-                await ctx.send('You Choose Stone')
-                await ctx.send(f'Calender Choose {r_choice}')
+                c_embed.add_field(name='You Choosen:',value='Stone')
+                c_embed.add_field(name='Calender Choosen:',value=r_choice)
+                await ctx.send(embed=c_embed)
+                
                 userchoice = 'stone'
             elif str(reaction.emoji) == '🖐️':
-                await ctx.send('You Choose Paper')
-                await ctx.send(f'Calender Choose {r_choice}')
+                c_embed.add_field(name='You Choosen:',value='Paper')
+                c_embed.add_field(name='Calender Choosen:',value=r_choice)
+                await ctx.send(embed=c_embed)
                 userchoice = 'paper'
             elif str(reaction.emoji) == '✌️':
-                await ctx.send('You Choose Scissor')
-                await ctx.send(f'Calender Choose {r_choice}')
+                c_embed.add_field(name='You Choosen:',value='Scissor')
+                c_embed.add_field(name='Calender Choosen:',value=r_choice)
+                await ctx.send(embed=c_embed)
                 userchoice = 'scissor'
             elif str(reaction.emoji) == '❌':
                 await ctx.send('**You Terminated the Game**')        
                 break
 
+            r_embed = discord.Embed(title='',color=0xff9900)
+            await ctx.send(embed=r_embed)
             if r_choice == userchoice:
-                await ctx.send('its a tie')
+                r_embed = discord.Embed(title='Its a tie',color=0xff9900)
+                await ctx.send(embed=r_embed)
                 myscore = myscore+50
                 botscore = botscore+50
             elif userchoice == 'stone':
                 if r_choice == 'paper':
-                    await ctx.send('You are covered by the Bot! Bot wins')
+                    r_embed = discord.Embed(title='You are covered by the Bot! Bot wins',color=0xff9900)
+                    await ctx.send(embed=r_embed)
+                
                     botscore=botscore+100
                 else:
-                    await ctx.send('Well Done Player! You Crushed the Bot')
+                    
+                    r_embed = discord.Embed(title='Well Done Player! You Crushed the Bot',color=0xff9900)
+                    await ctx.send(embed=r_embed)
                     myscore=myscore+100
             elif userchoice == 'paper':
                 if r_choice == 'scissor':
-                    await ctx.send('Bot Cut Down You in halves')
+                    r_embed = discord.Embed(title='Bot Cut Down You in halves',color=0xff9900)
+                    await ctx.send(embed=r_embed)
+                    
                     botscore=botscore+100
                 else:
-                    await ctx.send('You covered the Bot')
                     myscore=myscore+100
+                    r_embed = discord.Embed(title='You covered the Bot',color=0xff9900)
+                    await ctx.send(embed=r_embed)
+                    
+                    
             else:
                 if r_choice == 'stone':
-                    await ctx.send('Bot smashed You')
                     botscore=botscore+100
+                    r_embed = discord.Embed(title='Bot smashed You',color=0xff9900)
+                    
+                    await ctx.send(embed=r_embed)
+                    
+                    
                 else:
-                    await ctx.send('You Cut Down The Bot! You won')
                     myscore=myscore+100
+                    r_embed = discord.Embed(title='You Cut Down The Bot! You won',color=0xff9900)
+                    await ctx.send(embed=r_embed)
+                    
+                    
 
             score_embed=discord.Embed(title='SCOREBOARD',color=0xff9900)
             score_embed.add_field(name="Your Score",value=myscore)
@@ -497,7 +521,6 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
 
     except asyncio.TimeoutError:
         await ctx.send('Terminating Game Due to Timeout')
-
 
 
 
