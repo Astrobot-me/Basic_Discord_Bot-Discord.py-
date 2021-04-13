@@ -437,7 +437,7 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
 
 
             r_choice = random.choice(list1)
-            c_embed = discord.Embed(title='Choices',color=0xff9900)
+            c_embed = discord.Embed(title='Choices',description=None,color=0xff9900)
             if str(reaction.emoji) == '✊':
                 c_embed.add_field(name='You Choosen:',value='Stone')
                 c_embed.add_field(name='Calender Choosen:',value=r_choice)
@@ -461,49 +461,49 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
             r_embed = discord.Embed(title='',color=0xff9900)
             await ctx.send(embed=r_embed)
             if r_choice == userchoice:
-                r_embed = discord.Embed(title='Its a tie',color=0xff9900)
+                r_embed = discord.Embed(title='Its a tie',description=None,color=0xff9900)
                 await ctx.send(embed=r_embed)
                 myscore = myscore+50
                 botscore = botscore+50
             elif userchoice == 'stone':
                 if r_choice == 'paper':
-                    r_embed = discord.Embed(title='You are covered by the Bot! Bot wins',color=0xff9900)
+                    r_embed = discord.Embed(title='You are covered by the Bot! Bot wins',description=None,color=0xff9900)
                     await ctx.send(embed=r_embed)
                 
                     botscore=botscore+100
                 else:
                     
-                    r_embed = discord.Embed(title='Well Done Player! You Crushed the Bot',color=0xff9900)
+                    r_embed = discord.Embed(title='Well Done Player! You Crushed the Bot',description=None,color=0xff9900)
                     await ctx.send(embed=r_embed)
                     myscore=myscore+100
             elif userchoice == 'paper':
                 if r_choice == 'scissor':
-                    r_embed = discord.Embed(title='Bot Cut Down You in halves',color=0xff9900)
+                    r_embed = discord.Embed(title='Bot Cut Down You in halves',description=None,color=0xff9900)
                     await ctx.send(embed=r_embed)
                     
                     botscore=botscore+100
                 else:
                     myscore=myscore+100
-                    r_embed = discord.Embed(title='You covered the Bot',color=0xff9900)
+                    r_embed = discord.Embed(title='You covered the Bot',description=None,color=0xff9900)
                     await ctx.send(embed=r_embed)
                     
                     
             else:
                 if r_choice == 'stone':
                     botscore=botscore+100
-                    r_embed = discord.Embed(title='Bot smashed You',color=0xff9900)
+                    r_embed = discord.Embed(title='Bot smashed You',description=None,color=0xff9900)
                     
                     await ctx.send(embed=r_embed)
                     
                     
                 else:
                     myscore=myscore+100
-                    r_embed = discord.Embed(title='You Cut Down The Bot! You won',color=0xff9900)
+                    r_embed = discord.Embed(title='You Cut Down The Bot! You won',description=None,color=0xff9900)
                     await ctx.send(embed=r_embed)
                     
                     
 
-            score_embed=discord.Embed(title='SCOREBOARD',color=0xff9900)
+            score_embed=discord.Embed(title='SCOREBOARD',description=None,color=0xff9900)
             score_embed.add_field(name="Your Score",value=myscore)
             score_embed.add_field(name='Calender Score',value=botscore)
             await ctx.send(embed=score_embed)
@@ -514,7 +514,7 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
             title = 'Game tied'
         else:
             title = 'You Defeated Bot! you Won'
-        res_embed=discord.Embed(title=title,color=0xff9900)
+        res_embed=discord.Embed(title=title,description=None,color=0xff9900)
         res_embed.add_field(name='Your Total Score',value=myscore)
         res_embed.add_field(name='Calender Total Score',value=botscore)
         await ctx.send(embed=res_embed)
