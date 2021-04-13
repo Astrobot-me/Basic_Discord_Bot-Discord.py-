@@ -419,7 +419,7 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
     embedVar.add_field(name=":v: SCISSORS", value="React with :v: emoji to choose scissors.", inline = False)
     embedVar.add_field(name='Rules',value='1).You or Calender Will Get 100 point for Each Winning\n2).50 Points for Tie\n3).TimeOut:- 20secs')
     emb = await ctx.send(embed = embedVar)
-
+    await asyncio.sleep(2)
     
 
     def check(reaction, user):
@@ -457,9 +457,9 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
             elif str(reaction.emoji) == '❌':
                 await ctx.send('**You Terminated the Game**')        
                 break
-
-            r_embed = discord.Embed(title='',color=0xff9900)
-            await ctx.send(embed=r_embed)
+            asyncio.sleep(1)
+            #r_embed = discord.Embed(title='',color=0xff9900)
+            #await ctx.send(embed=r_embed)
             if r_choice == userchoice:
                 r_embed = discord.Embed(title='Its a tie',description=None,color=0xff9900)
                 await ctx.send(embed=r_embed)
