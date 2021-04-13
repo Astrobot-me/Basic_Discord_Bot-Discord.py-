@@ -539,6 +539,12 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
 
 
 
+@client.command(aliases=['60'])
+async def sec60(ctx):
+    await ctx.send(file=discord.File('timer.gif'))
+    await asyncio.sleep(60)
+    await ctx.channel.purge(limit=1)
+    await ctx.send('Timer Ended')
 
 
 
