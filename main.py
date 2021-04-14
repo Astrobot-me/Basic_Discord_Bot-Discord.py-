@@ -603,7 +603,21 @@ async def heart(ctx,*,content):
     await ctx.send(file=discord.File('meme.png'))
     os.remove('meme.png')
 
+@client.command()
+async def thonk(ctx,*,content):
+    img = Image.open("weird.jpg")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("sans2.ttf", 80)
+    t = content.split('/')
+    draw.text((860, 220),t[0],(0, 0, 0),font=font)
+    draw.text((860, 680),t[1],(0, 0, 0),font=font)
 
+    img.save('meme.png')
+    #meme_embed = discord.Embed(title=None,color=discord.Color.purple())
+    #meme_embed.set_image(url=meme)
+    #await ctx.send(embed=meme_embed)
+    await ctx.send(file=discord.File('meme.png'))
+    os.remove('meme.png')
 
 
 
