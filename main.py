@@ -9,6 +9,7 @@ from PIL import ImageFont
 from PIL import ImageDraw 
 from currency_converter import CurrencyConverter
 import wikipedia
+import os
 c = CurrencyConverter()
 
 
