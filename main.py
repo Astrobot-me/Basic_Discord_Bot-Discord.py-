@@ -619,7 +619,13 @@ async def thonk(ctx,*,content):
     await ctx.send(file=discord.File('meme.png'))
     os.remove('meme.png')
 
-
+@client.command()
+async def poll(ctx,*,question):
+    poll_embed = discord.Embed(title='**POLL**',description='React To Vote',color=0x1aebcb)
+    poll_embed.add_field(name=question,value='For Yes✔️ \n For No ❌')
+    mess = await ctx.send(embed=poll_embed)
+    await mess.add_reaction('✔️')
+    await mess.add_reaction('❌')
 
 
 
