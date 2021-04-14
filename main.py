@@ -226,16 +226,17 @@ async def wikisearch(ctx,search):
 
     try:
         reaction, user = await client.wait_for("reaction_add", timeout=10, check=check)
-
+        
+        
         if str(reaction.emoji) == '1️⃣':
             result = wikipedia.page(serch_result[0])
             content = result.content
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
             try:
-                result_embed.set_image(url=result.images[0])
-            except:
                 result_embed.set_image(url=result.images[1])
+            except:
+                result_embed.set_image(url=result.images[0])
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)   
         elif str(reaction.emoji) == '2️⃣':
@@ -244,9 +245,9 @@ async def wikisearch(ctx,search):
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
             try:
-                result_embed.set_image(url=result.images[0])
-            except:
                 result_embed.set_image(url=result.images[1])
+            except:
+                result_embed.set_image(url=result.images[0])
 
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)
@@ -256,9 +257,9 @@ async def wikisearch(ctx,search):
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
             try:
-                result_embed.set_image(url=result.images[0])
-            except:
                 result_embed.set_image(url=result.images[1])
+            except:
+                result_embed.set_image(url=result.images[0])
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)
         elif str(reaction.emoji) == '4️⃣':
@@ -267,9 +268,9 @@ async def wikisearch(ctx,search):
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
             try:
-                result_embed.set_image(url=result.images[0])
-            except:
                 result_embed.set_image(url=result.images[1])
+            except:
+                result_embed.set_image(url=result.images[0])
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)
         else:
@@ -278,13 +279,14 @@ async def wikisearch(ctx,search):
             result_embed.add_field(name='Title of The Article',value=result.title,inline=False)
             result_embed.add_field(name='Content',value=str(content[:900]+'............**OPEN LINK TO READ MORE**'),inline=False)
             try:
-                result_embed.set_image(url=result.images[0])
-            except:
                 result_embed.set_image(url=result.images[1])
+            except:
+                result_embed.set_image(url=result.images[0])
             result_embed.add_field(name='Link to the Article',value=result.url,inline=False)
             await ctx.send(embed=result_embed)
     except asyncio.TimeoutError:
         await ctx.send('**Time out**')
+
 
 
 @client.command(aliases=['ngg'])
@@ -343,7 +345,7 @@ async def number_guess(ctx):
             hint_embed.add_field(name='Range Hint:',value='Number is between 86 to 90',inline=False)
     else:
         if int(choice) in range(91,96):
-            hint_embed.add_field(name='Range Hint:',value='Number is between 90 to 95',inline=False)
+            hint_embed.add_field(name='Range Hint:',value='Number is between 91 to 95',inline=False)
         else:
             hint_embed.add_field(name='Range Hint:',value='Number is between 96 to 100',inline=False)
     
@@ -375,36 +377,42 @@ async def number_guess(ctx):
         #user_choice = (await client.wait_for('message', check=check,timeout=60)).content
         while chanses > 0:
             user_choice = (await client.wait_for('message', check=check,timeout=60)).content
-            if user_choice==str(choice):
-                await ctx.send('**You are Lucky this Time!You Guessed Right**')
-                await ctx.send("**The Number Was :-**"+ str(choice))
-                break
+            nc = user_choice.isdigit()
+
+            if nc==True:
+                if user_choice==str(choice):   
+                    await ctx.send('**You are Lucky this Time!You Guessed Right**')
+                    await ctx.send("**The Number Was :-**"+ str(choice))
+                    break
+                else:
+                    await ctx.send("**'Try Again! Read Hints Carefully'**")
+                    chanses = chanses-1
             else:
-                await ctx.send("**'Try Again! Read Hints Carefully'**")
-                chanses = chanses-1
+                await ctx.send("**'Invalid input! Input Numbers'**")
+            
 
             life = discord.Embed(title=f'Life Remaining {chanses}',color=discord.Color.orange())
             await ctx.send(embed=life)
+
+        if chanses==3:
+            title = "You are born Genius"
+        elif chanses==2:
+            title =  "You are like a Rookie Detective"
+        elif chanses==1:
+            title =  "You Won"
+        else:
+            title = 'Game OVER! You Loose'
+            no = discord.Embed(title=f"The Number Was: {choice}",color=discord.Color.orange())
+            await ctx.send(embed=no)
+        
+        r_embed = discord.Embed(title=title,color=discord.Color.orange())
+
+    
+        await ctx.send(embed=r_embed)
+
+
     except asyncio.TimeoutError:
         await ctx.send('Timed Out')
-    
-    
-
-    if chanses==3:
-        title = "You are born Genius"
-    elif chanses==2:
-        title =  "You are like a Rookie Detective"
-    elif chanses==1:
-        title =  "You Won"
-    else:
-        title = 'Game OVER! You Loose'
-        no = discord.Embed(title=f"The Number Was: {choice}",color=discord.Color.orange())
-        await ctx.send(embed=no)
-        
-    r_embed = discord.Embed(title=title,color=discord.Color.orange())
-
-    
-    await ctx.send(embed=r_embed)
 
 
 
@@ -524,6 +532,21 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
 
 
 
+@client.command()
+async def hit(ctx,text):
+    img = Image.open("traintruck.jpg")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("sans2.ttf", 80)
+    t = text.split('/')
+    draw.text((297, 950),t[0],(255, 255, 255),font=font)
+    draw.text((620, 120),t[1],(0, 0, 0),font=font)
+    img.save('meme.png')
+    #meme_embed = discord.Embed(title=None,color=discord.Color.purple())
+    #meme_embed.set_image(url=meme)
+    #await ctx.send(embed=meme_embed)
+    await ctx.send(file=discord.File('meme.png'))
+    os.remove('meme.png')
+    
 
 
 
@@ -537,14 +560,6 @@ async def sps(ctx):    #rps is short for rock, paper, scissor
 
 
 
-
-
-@client.command(aliases=['60'])
-async def sec60(ctx):
-    await ctx.send(file=discord.File('timer.gif'))
-    await asyncio.sleep(60)
-    await ctx.channel.purge(limit=1)
-    await ctx.send('Timer Ended')
 
 
 
