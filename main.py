@@ -548,8 +548,60 @@ async def hit(ctx,text):
     await ctx.send(file=discord.File('meme.png'))
     os.remove('meme.png')
     
+@client.command()
+async def yesno(ctx,*,content):
+    img = Image.open("sirazee.jpg")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("sans2.ttf", 80)
+    t = content.split('/')
+    draw.text((720, 650),t[0],(0, 0, 0),font=font,anchor=None,align='center')
+    draw.text((720, 140),t[1],(0, 0, 0),font=font,anchor=None,align='center')
+    img.save('meme.png')
+    #meme_embed = discord.Embed(title=None,color=discord.Color.purple())
+    #meme_embed.set_image(url=meme)
+    #await ctx.send(embed=meme_embed)
+    await ctx.send(file=discord.File('meme.png'))
+    os.remove('meme.png')
 
 
+
+@client.command(aliases=['qrcode'])
+async def qr(ctx,*,content,member:discord.Member = None):
+    member = ctx.author if not member else member
+    await ctx.channel.purge(limit = 1)
+    await ctx.send('**CHECK YOUR DMs**')
+    data=content
+    qr = qrcode.QRCode(version=1,box_size=10,border=5)
+    qr.add_data(data)
+    img = qr.make_image(fill_color='white',back_color='black')
+    embed = discord.Embed(title='Your Qr Code is Here',description=f'Qr code For link {content}',color=member.color,timestamps=ctx.message.created_at)
+    img.save('QRcode.png')
+    try:
+        await member.send(embed=embed)
+        await member.send(file=discord.File('QRcode.png'))
+    except:
+        await ctx.send('Your Dms closed')
+    await asyncio.sleep(1)
+    os.remove('QRcode.png')
+    
+
+@client.command()
+async def heart(ctx,*,content):
+    img = Image.open("heart.jpg")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("sans2.ttf", 80)
+    t = content.split('/')
+    draw.text((200, 180),t[0],(0, 0, 0),font=font)
+    draw.text((200, 500),t[1],(0, 0, 0),font=font)
+    draw.text((200, 800),t[2],(0, 0, 0),font=font)
+
+
+    img.save('meme.png')
+    #meme_embed = discord.Embed(title=None,color=discord.Color.purple())
+    #meme_embed.set_image(url=meme)
+    #await ctx.send(embed=meme_embed)
+    await ctx.send(file=discord.File('meme.png'))
+    os.remove('meme.png')
 
 
 
