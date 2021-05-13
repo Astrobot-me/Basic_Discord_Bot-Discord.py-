@@ -683,4 +683,4 @@ async def poll(ctx,*,question):
 
 
 
-client.run('ODE2OTk0MjY1Mzg4NDE3MDM0.YEDDMw.U-Zq2m5PO0ZctUwcTQ0db9PoDuE')
+client.run('Your Token')
