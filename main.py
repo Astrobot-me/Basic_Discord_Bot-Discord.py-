@@ -22,22 +22,10 @@ dice = ['1','2','3','4','5']
 magic_ball = ['As I see it, yes.','Ask again later','Better not tell you now','Cannot predict now','Concentrate and ask again','Dont count on it','It is certain','It is decidedly so',"Hell No!"]
 @client.event
 async def on_ready():
-    botonline_channel = client.get_channel(828622524552183809)
-    print('Bot is Ready')
-    while True:
-        embed = discord.Embed(title='I am Online',color=discord.Color.blurple())
-        await botonline_channel.send(embed=embed)
-        await asyncio.sleep(3600)
-
-@client.event
-async def on_member_join(member):
-    member_joinchannel = client.get_channel(828623138304163881)
-    embed = discord.Embed(title=f'**Welcome to the Calender Official** {member.display_name} {member.id}')
-    embed.set_thumbnail(url=member.avatar_url)
-    #embed.set_image(url='https://image.freepik.com/free-vector/welcome-neon-sign-vector_53876-76088.jpg')
-    await member_joinchannel.send(embed=embed)
     
-#print(x)
+    print('Bot is Ready')
+   
+
 
 #discod presense
 async def ch_pr():
